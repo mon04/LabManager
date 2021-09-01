@@ -37,34 +37,26 @@ public class RootController implements Initializable {
         combo_caEvaluationEndsDay.setItems(days);
 
         //Default "New" module
-        moduleObjects.add(new Module(
-                "",
-                "New",
-                new ArrayList<LabSession>(),
-                new ArrayList<Week>(),
-                new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,0)),
-                new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0)),
-                LocalDateTime.of(2021,8,31,23,59)
-        ));
+        moduleObjects.add(new Module("New"));
 
         //Add some test Modules
         moduleObjects.add(new Module(
-                "Introduction to Programming I",
+                "Introduction to Programming 1",
                 "CS161",
                 new ArrayList<LabSession>(),
                 new ArrayList<Week>(),
                 new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,30)),
                 new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(18,0)),
-                LocalDateTime.of(2021,8,31,23,59)
+                LocalDateTime.of(2022,8,31,23,59)
         ));
         moduleObjects.add(new Module(
-                "Introduction to Programming II",
-                "CS162",
+                "Computer Systems 1",
+                "CS171",
                 new ArrayList<LabSession>(),
                 new ArrayList<Week>(),
                 new DayOfWeekAndTime(DayOfWeek.TUESDAY, LocalTime.of(12,0)),
                 new DayOfWeekAndTime(DayOfWeek.SUNDAY, LocalTime.of(15,0)),
-                LocalDateTime.of(2022,7,29,22,29)
+                LocalDateTime.of(2022,8,31,23,59)
         ));
 
         //Set up items in 'Saved Modules' listView
@@ -228,19 +220,9 @@ public class RootController implements Initializable {
 
     public Module newModuleFromData() {
 
-        Module newModule = new Module(
-                "",
-                "CREATEME",
-                new ArrayList<LabSession>(),
-                new ArrayList<Week>(),
-                new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,0)),
-                new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0)),
-                LocalDateTime.of(2021,8,31,23,59)
-        );
-
+        Module newModule = new Module();
         setModuleData(newModule);
         newModule.setCode(tf_moduleCode.getText());
-
         return newModule;
     }
 

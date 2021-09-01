@@ -1,5 +1,6 @@
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Module {
@@ -20,6 +21,21 @@ public class Module {
 		this.problemsReleased = problemsReleased;
 		this.caEvaluationEnds = caEvaluationEnds;
 		this.problemsDisappear = problemsDisappear;
+	}
+
+	public Module(String code) {
+		this();
+		this.code = code;
+	}
+
+	public Module() {
+		title = "";
+		code = "DEFAULT_CODE";
+		labSessions = new ArrayList<LabSession>();
+		weeks = new ArrayList<Week>();
+		problemsReleased = new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,0));
+		caEvaluationEnds = new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0));
+		problemsDisappear = LocalDateTime.of(2021,8,31,23,59);
 	}
 
 	public String getTitle() {
