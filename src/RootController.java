@@ -88,7 +88,7 @@ public class RootController implements Initializable {
 
             int selected = list_savedModules.getSelectionModel().getSelectedIndex();
             Module selectedModule = moduleObjects.get(selected);
-            System.out.println("Selected: " + selectedModule.getCode());
+            //System.out.println("Selected: " + selectedModule.getCode());
 
             label_moduleEditorHeading.setText(selectedModule.getFullTitle());
 
@@ -137,11 +137,9 @@ public class RootController implements Initializable {
 
             if(moduleExists(tf_moduleCode.getText())) {
                 setModuleData(getModule(tf_moduleCode.getText()));
-                updateModulesList();
             }
             else {
                 moduleObjects.add(newModuleFromData());
-                updateModulesList();
             }
         }
         updateModulesList();
@@ -169,17 +167,17 @@ public class RootController implements Initializable {
 
         moduleFullTitles = FXCollections.observableArrayList();
 
+        sortModules();
         for(Module m : moduleObjects) {
             moduleFullTitles.add(m.getFullTitle());
         }
-        sortModules();
 
         list_savedModules.setItems(moduleFullTitles);
     }
 
     public void sortModules() {
 
-        System.out.println("Sort method called");
+        //System.out.println("Sort method called");
 
         for(int i = 0; i < moduleObjects.size(); i++) {
             //System.out.println(i+" --------");
@@ -194,7 +192,7 @@ public class RootController implements Initializable {
 
                     if (m1.getCode().compareToIgnoreCase(m2.getCode()) > 0) {
                         Collections.swap(moduleObjects, j, j-1);
-                        //System.out.println("***SWAP***");
+                        //System.out.println("!SWAPPED!");
                     }
 
                 }
