@@ -22,18 +22,20 @@ public class RootController implements Initializable {
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
     ObservableList<String> days = FXCollections.observableArrayList();
 
+
     public void initialize(URL url, ResourceBundle rb) {
 
         label_moduleEditorHeading.setText("Select a module above");
         vbox_newModule.setDisable(true);
 
-        for(int i = 1; i <= 7; i++) {
-            days.add(DayOfWeek.of(i).getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+        //Set items for 'day of week' combo boxes
+        for(DayOfWeek d : DayOfWeek.values()) {
+            days.add(d.getDisplayName(TextStyle.FULL, Locale.ENGLISH));
         }
         combo_problemsReleasedDay.setItems(days);
         combo_caEvaluationEndsDay.setItems(days);
 
-        //Default "New module"
+        //Default "New" module
         moduleObjects.add(new Module(
                 "",
                 "New",
@@ -64,11 +66,19 @@ public class RootController implements Initializable {
                 LocalDateTime.of(2022,7,29,22,29)
         ));
 
+        //Set up items in 'Saved Modules' listView
         ObservableList<String> modules = FXCollections.observableArrayList();
         for(Module m : moduleObjects) {
             modules.add(m.getFullTitle());
         }
         list_savedModules.setItems(modules);
+
+        //Set placeholders for 'Weeks' and 'Groups' listViews
+        list_moduleWeeks.setPlaceholder(new Label("Click 'Edit' to add weeks"));
+        list_moduleWeeks.getPlaceholder().setOpacity(0.5);
+        list_moduleGroups.setPlaceholder(new Label("Click 'Edit' to add groups"));
+        list_moduleGroups.getPlaceholder().setOpacity(0.5);
+
     }
 
     @FXML

@@ -54,16 +54,21 @@
                      <children>
                         <Label prefWidth="45.0" text="Weeks:" />
                         <ListView fx:id="list_moduleWeeks" focusTraversable="false" prefHeight="81.0" prefWidth="274.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="btn_moduleWeeksEdit" mnemonicParsing="false" onAction="#openWeeksEditor" text="Edit..." />
+                        <Button fx:id="btn_moduleWeeksEdit" mnemonicParsing="false" onAction="#openWeeksEditor" prefWidth="50.0" text="Edit" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="68.0" prefWidth="200.0" spacing="4.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label prefWidth="45.0" text="Groups:" />
                         <ListView fx:id="list_moduleGroups" focusTraversable="false" prefHeight="87.0" prefWidth="274.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="btn_moduleGroupsEdit" mnemonicParsing="false" onAction="#openGroupsEditor" text="Edit..." />
+                        <Button fx:id="btn_moduleGroupsEdit" mnemonicParsing="false" onAction="#openGroupsEditor" prefWidth="50.0" text="Edit" />
                      </children>
                   </HBox>
+                  <Separator prefWidth="200.0">
+                     <padding>
+                        <Insets top="8.0" />
+                     </padding>
+                  </Separator>
                   <HBox alignment="BASELINE_CENTER" layoutX="10.0" layoutY="36.0" prefWidth="200.0" spacing="4.0">
                      <children>
                         <Label prefHeight="17.0" prefWidth="116.0" text="Problems released:" HBox.hgrow="ALWAYS" />
@@ -75,7 +80,7 @@
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
                            <children>
-                              <TextField fx:id="tf_problemsReleasedTime" prefHeight="25.0" prefWidth="49.0" />
+                              <TextField fx:id="tf_problemsReleasedTime" prefHeight="25.0" prefWidth="50.0" />
                               <Label text="time" textFill="#9a9a9a" />
                            </children>
                         </VBox>
@@ -95,7 +100,7 @@
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
                            <children>
-                              <TextField fx:id="tf_caEvaluationEndsTime" prefHeight="25.0" prefWidth="90.0" />
+                              <TextField fx:id="tf_caEvaluationEndsTime" prefHeight="25.0" prefWidth="50.0" />
                               <Label text="time" textFill="#9a9a9a" />
                            </children>
                         </VBox>
@@ -112,7 +117,7 @@
                         </VBox>
                         <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
                            <children>
-                              <TextField fx:id="tf_problemsDisappearTime" prefHeight="25.0" prefWidth="90.0" />
+                              <TextField fx:id="tf_problemsDisappearTime" prefHeight="25.0" prefWidth="50.0" />
                               <Label text="time" textFill="#9a9a9a" />
                            </children>
                         </VBox>
