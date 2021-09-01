@@ -28,14 +28,17 @@ public class Module {
 		this.code = code;
 	}
 
+
 	public Module() {
-		title = "";
-		code = "DEFAULT_CODE";
-		labSessions = new ArrayList<LabSession>();
-		weeks = new ArrayList<Week>();
-		problemsReleased = new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,0));
-		caEvaluationEnds = new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0));
-		problemsDisappear = LocalDateTime.of(2021,8,31,23,59);
+		this(
+			"",
+			"DEFAULT_CODE",
+			new ArrayList<LabSession>(),
+			new ArrayList<Week>(),
+			new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9, 0)),
+			new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0)),
+			LocalDateTime.of(2021, 8, 31, 23, 59)
+		);
 	}
 
 	public String getTitle() {
