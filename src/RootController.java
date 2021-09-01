@@ -20,26 +20,27 @@ import java.util.ResourceBundle;
 public class RootController implements Initializable {
 
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
+    ObservableList<String> days = FXCollections.observableArrayList();
 
     public void initialize(URL url, ResourceBundle rb) {
 
         label_moduleEditorHeading.setText("New module");
 
-        ObservableList<String> days = FXCollections.observableArrayList();
         for(int i = 1; i <= 7; i++) {
             days.add(DayOfWeek.of(i).getDisplayName(TextStyle.FULL, Locale.ENGLISH));
         }
         combo_problemsReleasedDay.setItems(days);
         combo_caEvaluationEndsDay.setItems(days);
 
+
         moduleObjects.add(new Module(
                 "New module",
                 "",
                 new ArrayList<LabSession>(),
                 new ArrayList<Week>(),
-                new DayOfWeekAndTime(1, LocalTime.of(0,0)),
-                new DayOfWeekAndTime(1, LocalTime.of(0,0)),
-                LocalDateTime.of(2021,1,1,0,0)
+                new DayOfWeekAndTime(1, LocalTime.of(8,30)),
+                new DayOfWeekAndTime(5, LocalTime.of(21,0)),
+                LocalDateTime.of(2021,8,31,23,59)
         ));
 
         moduleObjects.add(new Module(
@@ -151,6 +152,9 @@ public class RootController implements Initializable {
             label_moduleEditorHeading.setText(module.getFullTitle());
             tf_moduleCode.setText(module.getCode());
             tf_moduleTitle.setText(module.getTitle());
+            combo_problemsReleasedDay.setValue(module.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            combo_caEvaluationEndsDay.setValue(module.getCaEvaluationEnds().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            date_problemsDisappear.setValue(module.getProblemsDisappear().toLocalDate());
             tf_problemsReleasedTime.setText(module.getProblemsReleased().getTime().toString());
             tf_caEvaluationEndsTime.setText(module.getCaEvaluationEnds().getTime().toString());
             tf_problemsDisappearTime.setText(module.getProblemsDisappear().toLocalTime().toString());

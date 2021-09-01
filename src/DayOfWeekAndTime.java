@@ -20,6 +20,10 @@ public class DayOfWeekAndTime {
         return day;
     }
 
+    public int getDayAsInt() {
+        return day.getValue();
+    }
+
     public void setDay(DayOfWeek day) {
         this.day = day;
     }
