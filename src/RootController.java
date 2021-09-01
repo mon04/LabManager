@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
 public class RootController implements Initializable {
 
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
+    ObservableList<String> modules = FXCollections.observableArrayList();
     ObservableList<String> days = FXCollections.observableArrayList();
 
 
@@ -67,11 +69,7 @@ public class RootController implements Initializable {
         ));
 
         //Set up items in 'Saved Modules' listView
-        ObservableList<String> modules = FXCollections.observableArrayList();
-        for(Module m : moduleObjects) {
-            modules.add(m.getFullTitle());
-        }
-        list_savedModules.setItems(modules);
+        updateModulesList();
 
         //Set placeholders for empty 'Weeks' and 'Groups' listViews
         list_moduleWeeks.setPlaceholder(new Label(String.format("Click '%s' to add weeks", btn_moduleWeeksEdit.getText())));
@@ -91,6 +89,7 @@ public class RootController implements Initializable {
 
             String selected = list_savedModules.getSelectionModel().getSelectedItem();
             Module module = getModule(selected);
+            System.out.println("Selected: " + module.getCode());
 
             label_moduleEditorHeading.setText(module.getFullTitle());
 
@@ -121,16 +120,96 @@ public class RootController implements Initializable {
 
     @FXML
     void saveModule(ActionEvent event) {
+        if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
 
+            String selected = list_savedModules.getSelectionModel().getSelectedItem();
+            Module module = getModule(selected);
+
+            if(moduleExists(tf_moduleCode.getText())) {
+                setModuleData(getModule(tf_moduleCode.getText()));
+            }
+            else {
+                moduleObjects.add(newModuleFromData());
+            }
+        }
+
+        updateModulesList();
     }
 
-    public Module getModule(String fullTitle) {
+    public Module getModule(String listString) {
+
+        String code = listString;
+
+        //Cases where listString has code AND title
+        int index;
+        if((index = listString.indexOf('-')) > -1) {
+            code = listString.substring(0, index -1);
+        }
+
         for(Module m : moduleObjects) {
-            if(m.getFullTitle().equals(fullTitle)) {
+            if(m.getCode().equals(code)) {
                 return m;
             }
         }
         return moduleObjects.get(0);
+    }
+
+    public void updateModulesList() {
+
+        modules = FXCollections.observableArrayList();
+
+        for(Module m : moduleObjects) {
+            modules.add(m.getFullTitle());
+        }
+        list_savedModules.setItems(modules);
+    }
+
+    public boolean moduleExists(String code) {
+
+        for(Module m : moduleObjects) {
+            if(m.getCode().equals(code)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Module newModuleFromData() {
+
+        Module newModule = new Module(
+                "",
+                "CREATEME",
+                new ArrayList<LabSession>(),
+                new ArrayList<Week>(),
+                new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,0)),
+                new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0)),
+                LocalDateTime.of(2021,8,31,23,59)
+        );
+
+        setModuleData(newModule);
+        newModule.setCode(tf_moduleCode.getText());
+
+        return newModule;
+    }
+
+    public void setModuleData(Module targetModule) {
+        targetModule.setTitle(tf_moduleTitle.getText());
+        //targetModule.setCode(tf_moduleCode.getText());
+
+        //DayOfWeekAndTime problemsReleased
+        DayOfWeek problemsReleasedDay = DayOfWeek.of(combo_problemsReleasedDay.getSelectionModel().getSelectedIndex()+1);
+        LocalTime problemsReleasedTime = LocalTime.parse(tf_problemsReleasedTime.getText());
+        targetModule.setProblemsReleased(new DayOfWeekAndTime(problemsReleasedDay, problemsReleasedTime));
+
+        //DayOfWeekAndTime caEvaluationEnds
+        DayOfWeek caEvaluationEndsDay = DayOfWeek.of(combo_caEvaluationEndsDay.getSelectionModel().getSelectedIndex()+1);
+        LocalTime caEvaluationEndsTime = LocalTime.parse(tf_caEvaluationEndsTime.getText());
+        targetModule.setCaEvaluationEnds(new DayOfWeekAndTime(caEvaluationEndsDay, caEvaluationEndsTime));
+
+        //LocalDateTime problemsDisappear
+        LocalDate problemsDisappearDate = date_problemsDisappear.getValue();
+        LocalTime problemsDisappearTime = LocalTime.parse(tf_problemsDisappearTime.getText());
+        targetModule.setProblemsDisappear(LocalDateTime.of(problemsDisappearDate, problemsDisappearTime));
     }
 
     @FXML
