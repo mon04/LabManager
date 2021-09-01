@@ -188,7 +188,6 @@ public class RootController implements Initializable {
 
         //Bubble sort
         for(int i = 0; i < moduleObjects.size(); i++) {
-
             for (int j = 1; j < (moduleObjects.size() -i); j++) {
 
                 Module m1 = moduleObjects.get(j-1);
@@ -200,11 +199,9 @@ public class RootController implements Initializable {
                     if (m1.getCode().compareToIgnoreCase(m2.getCode()) > 0) {
                         Collections.swap(moduleObjects, j, j-1);
                     }
-
                 }
             }
         }
-
     }
 
 
