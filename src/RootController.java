@@ -58,8 +58,6 @@ public class RootController implements Initializable {
                 new DayOfWeekAndTime(DayOfWeek.SUNDAY, LocalTime.of(15,0)),
                 LocalDateTime.of(2022,8,31,23,59)
         ));
-
-        //Set up items in 'Saved Modules' listView
         updateModuleList();
 
         //Set placeholders for empty 'Weeks' and 'Groups' listViews
@@ -226,26 +224,25 @@ public class RootController implements Initializable {
         return newModule;
     }
 
-    public void setModuleData(Module targetModule) {
-        targetModule.setTitle(tf_moduleTitle.getText());
-        //targetModule.setCode(tf_moduleCode.getText());
+    public void setModuleData(Module target) {
+        target.setTitle(tf_moduleTitle.getText());
 
         //DayOfWeekAndTime problemsReleased
         int selectedIndex = combo_problemsReleasedDay.getSelectionModel().getSelectedIndex();
         DayOfWeek problemsReleasedDay = DayOfWeek.of(selectedIndex+1);
         LocalTime problemsReleasedTime = LocalTime.parse(tf_problemsReleasedTime.getText());
-        targetModule.setProblemsReleased(new DayOfWeekAndTime(problemsReleasedDay, problemsReleasedTime));
+        target.setProblemsReleased(new DayOfWeekAndTime(problemsReleasedDay, problemsReleasedTime));
 
         //DayOfWeekAndTime caEvaluationEnds
         selectedIndex = combo_caEvaluationEndsDay.getSelectionModel().getSelectedIndex();
         DayOfWeek caEvaluationEndsDay = DayOfWeek.of(selectedIndex+1);
         LocalTime caEvaluationEndsTime = LocalTime.parse(tf_caEvaluationEndsTime.getText());
-        targetModule.setCaEvaluationEnds(new DayOfWeekAndTime(caEvaluationEndsDay, caEvaluationEndsTime));
+        target.setCaEvaluationEnds(new DayOfWeekAndTime(caEvaluationEndsDay, caEvaluationEndsTime));
 
         //LocalDateTime problemsDisappear
         LocalDate problemsDisappearDate = date_problemsDisappear.getValue();
         LocalTime problemsDisappearTime = LocalTime.parse(tf_problemsDisappearTime.getText());
-        targetModule.setProblemsDisappear(LocalDateTime.of(problemsDisappearDate, problemsDisappearTime));
+        target.setProblemsDisappear(LocalDateTime.of(problemsDisappearDate, problemsDisappearTime));
     }
 
     @FXML
