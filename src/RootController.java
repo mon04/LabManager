@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
@@ -19,7 +18,7 @@ import java.util.*;
 public class RootController implements Initializable {
 
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
-    ObservableList<String> modules = FXCollections.observableArrayList();
+    ObservableList<String> moduleFullTitles = FXCollections.observableArrayList();
     ObservableList<String> days = FXCollections.observableArrayList();
 
 
@@ -87,23 +86,23 @@ public class RootController implements Initializable {
 
             vbox_newModule.setDisable(false);
 
-            String selected = list_savedModules.getSelectionModel().getSelectedItem();
-            Module module = getModule(selected);
-            System.out.println("Selected: " + module.getCode());
+            int selected = list_savedModules.getSelectionModel().getSelectedIndex();
+            Module selectedModule = moduleObjects.get(selected);
+            System.out.println("Selected: " + selectedModule.getCode());
 
-            label_moduleEditorHeading.setText(module.getFullTitle());
+            label_moduleEditorHeading.setText(selectedModule.getFullTitle());
 
-            tf_moduleCode.setText(module.getCode());
-            tf_moduleTitle.setText(module.getTitle());
+            tf_moduleCode.setText(selectedModule.getCode());
+            tf_moduleTitle.setText(selectedModule.getTitle());
 
-            combo_problemsReleasedDay.setValue(module.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-            tf_problemsReleasedTime.setText(module.getProblemsReleased().getTime().toString());
+            combo_problemsReleasedDay.setValue(selectedModule.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            tf_problemsReleasedTime.setText(selectedModule.getProblemsReleased().getTime().toString());
 
-            combo_caEvaluationEndsDay.setValue(module.getCaEvaluationEnds().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-            tf_caEvaluationEndsTime.setText(module.getCaEvaluationEnds().getTime().toString());
+            combo_caEvaluationEndsDay.setValue(selectedModule.getCaEvaluationEnds().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            tf_caEvaluationEndsTime.setText(selectedModule.getCaEvaluationEnds().getTime().toString());
 
-            date_problemsDisappear.setValue(module.getProblemsDisappear().toLocalDate());
-            tf_problemsDisappearTime.setText(module.getProblemsDisappear().toLocalTime().toString());
+            date_problemsDisappear.setValue(selectedModule.getProblemsDisappear().toLocalDate());
+            tf_problemsDisappearTime.setText(selectedModule.getProblemsDisappear().toLocalTime().toString());
         }
 
     }
@@ -119,11 +118,22 @@ public class RootController implements Initializable {
     }
 
     @FXML
+    void deleteModule(ActionEvent e) {
+
+        if(list_savedModules.getSelectionModel().getSelectedIndex() > 0) {
+
+            int selected = list_savedModules.getSelectionModel().getSelectedIndex();
+            moduleObjects.remove(selected);
+            updateModulesList();//updateModulesList();
+        }
+    }
+
+    @FXML
     void saveModule(ActionEvent event) {
         if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
 
-            String selected = list_savedModules.getSelectionModel().getSelectedItem();
-            Module module = getModule(selected);
+            int selected = list_savedModules.getSelectionModel().getSelectedIndex();
+            Module module = moduleObjects.get(selected);
 
             if(moduleExists(tf_moduleCode.getText())) {
                 setModuleData(getModule(tf_moduleCode.getText()));
@@ -157,14 +167,14 @@ public class RootController implements Initializable {
 
     public void updateModulesList() {
 
-        modules = FXCollections.observableArrayList();
+        moduleFullTitles = FXCollections.observableArrayList();
 
         for(Module m : moduleObjects) {
-            modules.add(m.getFullTitle());
+            moduleFullTitles.add(m.getFullTitle());
         }
         sortModules();
 
-        list_savedModules.setItems(modules);
+        list_savedModules.setItems(moduleFullTitles);
     }
 
     public void sortModules() {
@@ -289,5 +299,8 @@ public class RootController implements Initializable {
 
     @FXML
     private Button btn_saveModule;
+
+    @FXML
+    private Button btn_deleteModule;
 
 }
