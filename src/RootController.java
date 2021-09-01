@@ -154,10 +154,14 @@ public class RootController implements Initializable {
 
             if(moduleExists(tf_moduleCode.getText())) {
                 setModuleData(getModule(tf_moduleCode.getText()));
+                label_moduleEditorHeading.setText(module.getFullTitle());
             }
             else {
-                moduleObjects.add(newModuleFromData());
+                Module newModule = newModuleFromData();
+                moduleObjects.add(newModule);
+                label_moduleEditorHeading.setText(newModule.getFullTitle());
             }
+
         }
         updateModuleList();
     }
