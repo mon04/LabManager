@@ -74,9 +74,9 @@ public class RootController implements Initializable {
         list_savedModules.setItems(modules);
 
         //Set placeholders for 'Weeks' and 'Groups' listViews
-        list_moduleWeeks.setPlaceholder(new Label("Click 'Edit' to add weeks"));
+        list_moduleWeeks.setPlaceholder(new Label(String.format("Click '%s' to add weeks", btn_moduleWeeksEdit.getText())));
         list_moduleWeeks.getPlaceholder().setOpacity(0.5);
-        list_moduleGroups.setPlaceholder(new Label("Click 'Edit' to add groups"));
+        list_moduleGroups.setPlaceholder(new Label(String.format("Click '%s' to add groups", btn_moduleGroupsEdit.getText())));
         list_moduleGroups.getPlaceholder().setOpacity(0.5);
 
     }
