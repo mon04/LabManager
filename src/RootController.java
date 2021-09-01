@@ -69,6 +69,7 @@ public class RootController implements Initializable {
         //Set up items in 'Saved Modules' listView
         updateModulesList();
         updateModulesList();
+        System.out.println("INITIALIZATION DONE");
 
         //Set placeholders for empty 'Weeks' and 'Groups' listViews
         list_moduleWeeks.setPlaceholder(new Label(String.format("Click '%s' to add weeks", btn_moduleWeeksEdit.getText())));
@@ -168,22 +169,26 @@ public class RootController implements Initializable {
 
     public void sortModules() {
 
+        System.out.println("Sort method called");
+
         for(int i = 0; i < moduleObjects.size(); i++) {
+            //System.out.println(i+" --------");
             for (int j = 1; j < (moduleObjects.size() -i); j++) {
 
                 Module m1 = moduleObjects.get(j-1);
                 Module m2 = moduleObjects.get(j);
+                //System.out.println("m1="+m1.getCode());
+                //System.out.println("m2="+m2.getCode());
 
-                if (m1.getCode().compareToIgnoreCase(m2.getCode()) > 0) {
-                    Collections.swap(moduleObjects, j, j-1);
+                if(!m1.getCode().equals("New") && !m2.getCode().equals("New")) {
+
+                    if (m1.getCode().compareToIgnoreCase(m2.getCode()) > 0) {
+                        Collections.swap(moduleObjects, j, j-1);
+                        //System.out.println("***SWAP***");
+                    }
+
                 }
-            }
-        }
-
-        for(Module m: moduleObjects) {
-            if(m.getCode().equals("New")) {
-                moduleObjects.remove(m);
-                moduleObjects.add(0, m);
+                //System.out.println("-");
             }
         }
     }
