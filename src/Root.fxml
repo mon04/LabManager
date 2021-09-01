@@ -22,7 +22,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ListView fx:id="list_savedModules" onMouseClicked="#setModuleEditor" prefHeight="33.0" prefWidth="372.0" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="list_savedModules" onKeyPressed="#moduleListKeyPressed" onMouseClicked="#moduleListClicked" prefHeight="33.0" prefWidth="372.0" VBox.vgrow="ALWAYS" />
             <Separator prefWidth="200.0">
                <opaqueInsets>
                   <Insets />
@@ -74,7 +74,7 @@
                         <Label prefHeight="17.0" prefWidth="116.0" text="Problems released:" HBox.hgrow="ALWAYS" />
                         <VBox alignment="CENTER_LEFT" prefWidth="189.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <ComboBox fx:id="combo_problemsReleasedDay" editable="true" prefHeight="25.0" prefWidth="1200.0" />
+                              <ComboBox fx:id="combo_problemsReleasedDay" editable="true" onKeyPressed="#comboProblemsReleasedDayKeyPressed" prefHeight="25.0" prefWidth="1200.0" />
                               <Label text="day of week" textFill="#9a9a9a" />
                            </children>
                         </VBox>
@@ -94,7 +94,7 @@
                         <Label prefHeight="17.0" prefWidth="116.0" text="CA evaluation ends:" HBox.hgrow="ALWAYS" />
                         <VBox alignment="CENTER_LEFT" prefWidth="189.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <ComboBox fx:id="combo_caEvaluationEndsDay" editable="true" prefHeight="25.0" prefWidth="1200.0" />
+                              <ComboBox fx:id="combo_caEvaluationEndsDay" editable="true" onKeyPressed="#comboCaEvaluationEndsDayKeyPressed" prefHeight="25.0" prefWidth="1200.0" />
                               <Label text="day of week" textFill="#9a9a9a" />
                            </children>
                         </VBox>

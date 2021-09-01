@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
@@ -24,7 +26,7 @@ public class RootController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
 
-        label_moduleEditorHeading.setText("Select a module above");
+        label_moduleEditorHeading.setText("Select a module to edit");
         vbox_newModule.setDisable(true);
 
         //Set items for 'day of week' combo boxes
@@ -66,9 +68,7 @@ public class RootController implements Initializable {
         ));
 
         //Set up items in 'Saved Modules' listView
-        updateModulesList();
-        updateModulesList();
-        System.out.println("INITIALIZATION DONE");
+        updateModuleList();
 
         //Set placeholders for empty 'Weeks' and 'Groups' listViews
         list_moduleWeeks.setPlaceholder(new Label(String.format("Click '%s' to add weeks", btn_moduleWeeksEdit.getText())));
@@ -79,7 +79,16 @@ public class RootController implements Initializable {
     }
 
     @FXML
-    void setModuleEditor(MouseEvent event) {
+    void moduleListClicked(MouseEvent e) {
+        setModuleEditor();
+    }
+
+    @FXML
+    void moduleListKeyPressed(KeyEvent event) {
+        setModuleEditor();
+    }
+
+    void setModuleEditor() {
         //Called when user selects a module from the list (only works for left-clicks for now)
 
         if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
@@ -118,13 +127,27 @@ public class RootController implements Initializable {
     }
 
     @FXML
+    void comboProblemsReleasedDayKeyPressed(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER) {
+            combo_problemsReleasedDay.show();
+        }
+    }
+
+    @FXML
+    void comboCaEvaluationEndsDayKeyPressed(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER) {
+            combo_caEvaluationEndsDay.show();
+        }
+    }
+
+    @FXML
     void deleteModule(ActionEvent e) {
 
         if(list_savedModules.getSelectionModel().getSelectedIndex() > 0) {
 
             int selected = list_savedModules.getSelectionModel().getSelectedIndex();
             moduleObjects.remove(selected);
-            updateModulesList();//updateModulesList();
+            updateModuleList();
         }
     }
 
@@ -142,18 +165,10 @@ public class RootController implements Initializable {
                 moduleObjects.add(newModuleFromData());
             }
         }
-        updateModulesList();
+        updateModuleList();
     }
 
-    public Module getModule(String listString) {
-
-        String code = listString;
-
-        //Cases where listString has code AND title
-        int index;
-        if((index = listString.indexOf('-')) > -1) {
-            code = listString.substring(0, index -1);
-        }
+    public Module getModule(String code) {
 
         for(Module m : moduleObjects) {
             if(m.getCode().equals(code)) {
@@ -163,7 +178,7 @@ public class RootController implements Initializable {
         return moduleObjects.get(0);
     }
 
-    public void updateModulesList() {
+    public void updateModuleList() {
 
         moduleFullTitles = FXCollections.observableArrayList();
 
@@ -177,28 +192,25 @@ public class RootController implements Initializable {
 
     public void sortModules() {
 
-        //System.out.println("Sort method called");
-
+        //Bubble sort
         for(int i = 0; i < moduleObjects.size(); i++) {
-            //System.out.println(i+" --------");
+
             for (int j = 1; j < (moduleObjects.size() -i); j++) {
 
                 Module m1 = moduleObjects.get(j-1);
                 Module m2 = moduleObjects.get(j);
-                //System.out.println("m1="+m1.getCode());
-                //System.out.println("m2="+m2.getCode());
 
+                //Keep "New" at index 0
                 if(!m1.getCode().equals("New") && !m2.getCode().equals("New")) {
 
                     if (m1.getCode().compareToIgnoreCase(m2.getCode()) > 0) {
                         Collections.swap(moduleObjects, j, j-1);
-                        //System.out.println("!SWAPPED!");
                     }
 
                 }
-                //System.out.println("-");
             }
         }
+
     }
 
 
