@@ -24,7 +24,8 @@ public class RootController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
 
-        label_moduleEditorHeading.setText("New module");
+        label_moduleEditorHeading.setText("Select a module above");
+        vbox_newModule.setDisable(true);
 
         for(int i = 1; i <= 7; i++) {
             days.add(DayOfWeek.of(i).getDisplayName(TextStyle.FULL, Locale.ENGLISH));
@@ -32,47 +33,94 @@ public class RootController implements Initializable {
         combo_problemsReleasedDay.setItems(days);
         combo_caEvaluationEndsDay.setItems(days);
 
-
+        //Default "New module"
         moduleObjects.add(new Module(
                 "New module",
                 "",
                 new ArrayList<LabSession>(),
                 new ArrayList<Week>(),
-                new DayOfWeekAndTime(1, LocalTime.of(8,30)),
-                new DayOfWeekAndTime(5, LocalTime.of(21,0)),
+                new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,0)),
+                new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0)),
                 LocalDateTime.of(2021,8,31,23,59)
         ));
 
+        //Add some test Modules
         moduleObjects.add(new Module(
                 "Introduction to Programming I",
                 "CS161",
                 new ArrayList<LabSession>(),
                 new ArrayList<Week>(),
-                new DayOfWeekAndTime(1, LocalTime.of(9,30)),
-                new DayOfWeekAndTime(4, LocalTime.of(18,0)),
+                new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,30)),
+                new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(18,0)),
                 LocalDateTime.of(2021,8,31,23,59)
         ));
-
         moduleObjects.add(new Module(
-                "Computer Systems I",
-                "CS171",
+                "Introduction to Programming II",
+                "CS162",
                 new ArrayList<LabSession>(),
                 new ArrayList<Week>(),
-                new DayOfWeekAndTime(2, LocalTime.of(16,0)),
-                new DayOfWeekAndTime(4, LocalTime.of(18,0)),
-                LocalDateTime.of(2023,7,29,22,1)
+                new DayOfWeekAndTime(DayOfWeek.TUESDAY, LocalTime.of(12,0)),
+                new DayOfWeekAndTime(DayOfWeek.SUNDAY, LocalTime.of(15,0)),
+                LocalDateTime.of(2022,7,29,22,29)
         ));
 
         ObservableList<String> modules = FXCollections.observableArrayList();
-        //modules.add("CS161 - Introduction to Programming I");
-        //modules.add("CS162 - Introduction to Programming II");
-        //modules.add("CS171 - Computer Systems I");
-        //modules.add("CS172 - Computer Systems II");
         for(Module m : moduleObjects) {
             modules.add(m.getFullTitle());
         }
-
         list_savedModules.setItems(modules);
+    }
+
+    @FXML
+    void setModuleEditor(MouseEvent event) {
+        //Called when user selects a module from the list (only works for left-click atm)
+
+        if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
+
+            vbox_newModule.setDisable(false);
+
+            String selected = list_savedModules.getSelectionModel().getSelectedItem();
+            Module module = getModule(selected);
+
+            label_moduleEditorHeading.setText(module.getFullTitle());
+
+            tf_moduleCode.setText(module.getCode());
+            tf_moduleTitle.setText(module.getTitle());
+
+            combo_problemsReleasedDay.setValue(module.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            combo_caEvaluationEndsDay.setValue(module.getCaEvaluationEnds().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+
+            date_problemsDisappear.setValue(module.getProblemsDisappear().toLocalDate());
+
+            tf_problemsReleasedTime.setText(module.getProblemsReleased().getTime().toString());
+            tf_caEvaluationEndsTime.setText(module.getCaEvaluationEnds().getTime().toString());
+            tf_problemsDisappearTime.setText(module.getProblemsDisappear().toLocalTime().toString());
+        }
+
+    }
+
+    @FXML
+    void openGroupsEditor(ActionEvent event) {
+
+    }
+
+    @FXML
+    void openWeeksEditor(ActionEvent event) {
+
+    }
+
+    @FXML
+    void saveModule(ActionEvent event) {
+
+    }
+
+    public Module getModule(String fullTitle) {
+        for(Module m : moduleObjects) {
+            if(m.getFullTitle().equals(fullTitle)) {
+                return m;
+            }
+        }
+        return moduleObjects.get(0);
     }
 
     @FXML
@@ -122,53 +170,5 @@ public class RootController implements Initializable {
 
     @FXML
     private Button btn_saveModule;
-
-
-    @FXML
-    void openGroupsEditor(ActionEvent event) {
-
-    }
-
-    @FXML
-    void openWeeksEditor(ActionEvent event) {
-
-    }
-
-    @FXML
-    void saveModule(ActionEvent event) {
-
-    }
-
-    @FXML
-    void setModuleEditor(MouseEvent event) {
-
-        if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
-
-            vbox_newModule.setVisible(true);
-
-            String selected = list_savedModules.getSelectionModel().getSelectedItem();
-            Module module = getModule(selected);
-
-            label_moduleEditorHeading.setText(module.getFullTitle());
-            tf_moduleCode.setText(module.getCode());
-            tf_moduleTitle.setText(module.getTitle());
-            combo_problemsReleasedDay.setValue(module.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-            combo_caEvaluationEndsDay.setValue(module.getCaEvaluationEnds().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-            date_problemsDisappear.setValue(module.getProblemsDisappear().toLocalDate());
-            tf_problemsReleasedTime.setText(module.getProblemsReleased().getTime().toString());
-            tf_caEvaluationEndsTime.setText(module.getCaEvaluationEnds().getTime().toString());
-            tf_problemsDisappearTime.setText(module.getProblemsDisappear().toLocalTime().toString());
-        }
-
-    }
-
-    public Module getModule(String fullTitle) {
-        for(Module m : moduleObjects) {
-            if(m.getFullTitle().equals(fullTitle)) {
-                return m;
-            }
-        }
-        return moduleObjects.get(0);
-    }
 
 }
