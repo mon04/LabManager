@@ -40,16 +40,13 @@ public class Module {
 
 	public String getFullTitle() {
 
-		if(code.length() > 0 && title.length() > 0) {
-			return String.format("%s - %s", code, title);
+		String fullTitle = code;
+
+		if(title.length() > 0) {
+			fullTitle += String.format(" - %s", title);
 		}
-		else if(code.length() > 0) {
-			return code;
-		}
-		else if(title.length() > 0) {
-			return title;
-		}
-		return "UNTITLED MODULE";
+
+		return fullTitle;
 	}
 
 	public ArrayList<Week> getWeeks() {

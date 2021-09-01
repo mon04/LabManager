@@ -35,8 +35,8 @@ public class RootController implements Initializable {
 
         //Default "New module"
         moduleObjects.add(new Module(
-                "New module",
                 "",
+                "New",
                 new ArrayList<LabSession>(),
                 new ArrayList<Week>(),
                 new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,0)),
@@ -73,7 +73,7 @@ public class RootController implements Initializable {
 
     @FXML
     void setModuleEditor(MouseEvent event) {
-        //Called when user selects a module from the list (only works for left-click atm)
+        //Called when user selects a module from the list (only works for left-clicks for now)
 
         if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
 
