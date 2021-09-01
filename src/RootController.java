@@ -14,9 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RootController implements Initializable {
 
@@ -69,6 +67,7 @@ public class RootController implements Initializable {
         ));
 
         //Set up items in 'Saved Modules' listView
+        updateModulesList();
         updateModulesList();
 
         //Set placeholders for empty 'Weeks' and 'Groups' listViews
@@ -127,12 +126,13 @@ public class RootController implements Initializable {
 
             if(moduleExists(tf_moduleCode.getText())) {
                 setModuleData(getModule(tf_moduleCode.getText()));
+                updateModulesList();
             }
             else {
                 moduleObjects.add(newModuleFromData());
+                updateModulesList();
             }
         }
-
         updateModulesList();
     }
 
@@ -161,8 +161,33 @@ public class RootController implements Initializable {
         for(Module m : moduleObjects) {
             modules.add(m.getFullTitle());
         }
+        sortModules();
+
         list_savedModules.setItems(modules);
     }
+
+    public void sortModules() {
+
+        for(int i = 0; i < moduleObjects.size(); i++) {
+            for (int j = 1; j < (moduleObjects.size() -i); j++) {
+
+                Module m1 = moduleObjects.get(j-1);
+                Module m2 = moduleObjects.get(j);
+
+                if (m1.getCode().compareToIgnoreCase(m2.getCode()) > 0) {
+                    Collections.swap(moduleObjects, j, j-1);
+                }
+            }
+        }
+
+        for(Module m: moduleObjects) {
+            if(m.getCode().equals("New")) {
+                moduleObjects.remove(m);
+                moduleObjects.add(0, m);
+            }
+        }
+    }
+
 
     public boolean moduleExists(String code) {
 
