@@ -73,7 +73,7 @@ public class RootController implements Initializable {
         }
         list_savedModules.setItems(modules);
 
-        //Set placeholders for 'Weeks' and 'Groups' listViews
+        //Set placeholders for empty 'Weeks' and 'Groups' listViews
         list_moduleWeeks.setPlaceholder(new Label(String.format("Click '%s' to add weeks", btn_moduleWeeksEdit.getText())));
         list_moduleWeeks.getPlaceholder().setOpacity(0.5);
         list_moduleGroups.setPlaceholder(new Label(String.format("Click '%s' to add groups", btn_moduleGroupsEdit.getText())));
@@ -98,12 +98,12 @@ public class RootController implements Initializable {
             tf_moduleTitle.setText(module.getTitle());
 
             combo_problemsReleasedDay.setValue(module.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            tf_problemsReleasedTime.setText(module.getProblemsReleased().getTime().toString());
+
             combo_caEvaluationEndsDay.setValue(module.getCaEvaluationEnds().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            tf_caEvaluationEndsTime.setText(module.getCaEvaluationEnds().getTime().toString());
 
             date_problemsDisappear.setValue(module.getProblemsDisappear().toLocalDate());
-
-            tf_problemsReleasedTime.setText(module.getProblemsReleased().getTime().toString());
-            tf_caEvaluationEndsTime.setText(module.getCaEvaluationEnds().getTime().toString());
             tf_problemsDisappearTime.setText(module.getProblemsDisappear().toLocalTime().toString());
         }
 
