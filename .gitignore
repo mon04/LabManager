@@ -1,9 +1,2 @@
-out/
-tests/
-.idea/
 
-*.class
-*.out
-.DS_Store
-*.iml
 
