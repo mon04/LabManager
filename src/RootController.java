@@ -82,15 +82,15 @@ public class RootController implements Initializable {
 
     void setModuleEditor() {
 
-        if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
+        int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
+        if(selectedIndex > -1) {
 
             vbox_newModule.setDisable(false);
 
-            int selected = list_savedModules.getSelectionModel().getSelectedIndex();
-            Module selectedModule = moduleObjects.get(selected);
+            Module selectedModule = moduleObjects.get(selectedIndex);
 
             //Disable 'Delete module' btn for "New"
-            if(selected == 0) btn_deleteModule.setDisable(true);
+            if(selectedIndex == 0) btn_deleteModule.setDisable(true);
             else btn_deleteModule.setDisable(false);
 
             label_moduleEditorHeading.setText(selectedModule.getFullTitle());
@@ -107,7 +107,6 @@ public class RootController implements Initializable {
             date_problemsDisappear.setValue(selectedModule.getProblemsDisappear().toLocalDate());
             tf_problemsDisappearTime.setText(selectedModule.getProblemsDisappear().toLocalTime().toString());
         }
-
     }
 
     @FXML
@@ -137,20 +136,20 @@ public class RootController implements Initializable {
     @FXML
     void deleteModule(ActionEvent e) {
 
-        if(list_savedModules.getSelectionModel().getSelectedIndex() > 0) {
+        int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
+        if(selectedIndex > 0) {
 
-            int selected = list_savedModules.getSelectionModel().getSelectedIndex();
-            moduleObjects.remove(selected);
+            moduleObjects.remove(selectedIndex);
             updateModuleList();
         }
     }
 
     @FXML
     void saveModule(ActionEvent event) {
-        if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
+        int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
+        if(selectedIndex > -1) {
 
-            int selected = list_savedModules.getSelectionModel().getSelectedIndex();
-            Module module = moduleObjects.get(selected);
+            Module module = moduleObjects.get(selectedIndex);
 
             if(moduleExists(tf_moduleCode.getText())) {
                 setModuleData(getModule(tf_moduleCode.getText()));
@@ -232,12 +231,14 @@ public class RootController implements Initializable {
         //targetModule.setCode(tf_moduleCode.getText());
 
         //DayOfWeekAndTime problemsReleased
-        DayOfWeek problemsReleasedDay = DayOfWeek.of(combo_problemsReleasedDay.getSelectionModel().getSelectedIndex()+1);
+        int selectedIndex = combo_problemsReleasedDay.getSelectionModel().getSelectedIndex();
+        DayOfWeek problemsReleasedDay = DayOfWeek.of(selectedIndex+1);
         LocalTime problemsReleasedTime = LocalTime.parse(tf_problemsReleasedTime.getText());
         targetModule.setProblemsReleased(new DayOfWeekAndTime(problemsReleasedDay, problemsReleasedTime));
 
         //DayOfWeekAndTime caEvaluationEnds
-        DayOfWeek caEvaluationEndsDay = DayOfWeek.of(combo_caEvaluationEndsDay.getSelectionModel().getSelectedIndex()+1);
+        selectedIndex = combo_caEvaluationEndsDay.getSelectionModel().getSelectedIndex();
+        DayOfWeek caEvaluationEndsDay = DayOfWeek.of(selectedIndex+1);
         LocalTime caEvaluationEndsTime = LocalTime.parse(tf_caEvaluationEndsTime.getText());
         targetModule.setCaEvaluationEnds(new DayOfWeekAndTime(caEvaluationEndsDay, caEvaluationEndsTime));
 
