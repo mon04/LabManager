@@ -16,7 +16,7 @@ public class Main extends Application {
 
         stage.setTitle("LabManager for MULE");
         stage.setScene(scene);
-        //stage.setMinWidth(603);
+        //stage.setMinWidth(473);
         //stage.setMinHeight(835);
         stage.getIcons().add(new Image("/media/icon.png"));
         stage.show();

@@ -111,7 +111,7 @@
                         <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="Problems disappear:" HBox.hgrow="ALWAYS" />
                         <VBox alignment="CENTER_LEFT" prefWidth="189.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <DatePicker fx:id="date_problemsDisappear" minWidth="100.0" prefHeight="25.0" prefWidth="1200.0" />
+                              <DatePicker fx:id="date_problemsDisappear" editable="false" minWidth="100.0" prefHeight="25.0" prefWidth="1200.0" />
                               <Label text="date" textFill="#9a9a9a" />
                            </children>
                         </VBox>

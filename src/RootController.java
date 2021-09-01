@@ -89,7 +89,6 @@ public class RootController implements Initializable {
     }
 
     void setModuleEditor() {
-        //Called when user selects a module from the list (only works for left-clicks for now)
 
         if(list_savedModules.getSelectionModel().getSelectedIndex() > -1) {
 
@@ -97,7 +96,10 @@ public class RootController implements Initializable {
 
             int selected = list_savedModules.getSelectionModel().getSelectedIndex();
             Module selectedModule = moduleObjects.get(selected);
-            //System.out.println("Selected: " + selectedModule.getCode());
+
+            //Disable 'Delete module' btn for "New"
+            if(selected == 0) btn_deleteModule.setDisable(true);
+            else btn_deleteModule.setDisable(false);
 
             label_moduleEditorHeading.setText(selectedModule.getFullTitle());
 
@@ -171,7 +173,7 @@ public class RootController implements Initializable {
     public Module getModule(String code) {
 
         for(Module m : moduleObjects) {
-            if(m.getCode().equals(code)) {
+            if(m.getCode().equalsIgnoreCase(code)) {
                 return m;
             }
         }
