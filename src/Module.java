@@ -39,7 +39,17 @@ public class Module {
 	}
 
 	public String getFullTitle() {
-		return String.format("%s - %s", code, title);
+
+		if(code.length() > 0 && title.length() > 0) {
+			return String.format("%s - %s", code, title);
+		}
+		else if(code.length() > 0) {
+			return code;
+		}
+		else if(title.length() > 0) {
+			return title;
+		}
+		return "UNTITLED MODULE";
 	}
 
 	public ArrayList<Week> getWeeks() {

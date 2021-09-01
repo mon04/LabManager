@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RootController">
+<AnchorPane prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RootController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="169.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" spacing="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,7 +22,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ListView fx:id="list_savedModules" onKeyPressed="#setModuleEditor" onMouseClicked="#setModuleEditor" prefHeight="33.0" prefWidth="372.0" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="list_savedModules" onMouseClicked="#setModuleEditor" prefHeight="33.0" prefWidth="372.0" VBox.vgrow="ALWAYS" />
             <Separator prefWidth="200.0">
                <opaqueInsets>
                   <Insets />
@@ -66,16 +66,16 @@
                   </HBox>
                   <HBox alignment="BASELINE_CENTER" layoutX="10.0" layoutY="36.0" prefWidth="200.0" spacing="4.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="116.0" text="Problemes released:" HBox.hgrow="ALWAYS" />
+                        <Label prefHeight="17.0" prefWidth="116.0" text="Problems released:" HBox.hgrow="ALWAYS" />
                         <VBox alignment="CENTER_LEFT" prefWidth="189.0" HBox.hgrow="ALWAYS">
                            <children>
                               <ComboBox fx:id="combo_problemsReleasedDay" editable="true" prefHeight="25.0" prefWidth="1200.0" />
                               <Label text="day of week" textFill="#9a9a9a" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="68.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
                            <children>
-                              <TextField fx:id="tf_problemsReleasedTime" prefHeight="25.0" prefWidth="90.0" />
+                              <TextField fx:id="tf_problemsReleasedTime" prefHeight="25.0" prefWidth="49.0" />
                               <Label text="time" textFill="#9a9a9a" />
                            </children>
                         </VBox>
@@ -93,7 +93,7 @@
                               <Label text="day of week" textFill="#9a9a9a" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="68.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
                            <children>
                               <TextField fx:id="tf_caEvaluationEndsTime" prefHeight="25.0" prefWidth="90.0" />
                               <Label text="time" textFill="#9a9a9a" />
@@ -110,7 +110,7 @@
                               <Label text="date" textFill="#9a9a9a" />
                            </children>
                         </VBox>
-                        <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="68.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
                            <children>
                               <TextField fx:id="tf_problemsDisappearTime" prefHeight="25.0" prefWidth="90.0" />
                               <Label text="time" textFill="#9a9a9a" />

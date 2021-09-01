@@ -22,7 +22,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ListView fx:id="list_savedModules" onKeyPressed="#setModuleEditor" onMouseClicked="#setModuleEditor" prefHeight="33.0" prefWidth="372.0" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="list_savedModules" onMouseClicked="#setModuleEditor" prefHeight="33.0" prefWidth="372.0" VBox.vgrow="ALWAYS" />
             <Separator prefWidth="200.0">
                <opaqueInsets>
                   <Insets />
@@ -66,7 +66,7 @@
                   </HBox>
                   <HBox alignment="BASELINE_CENTER" layoutX="10.0" layoutY="36.0" prefWidth="200.0" spacing="4.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="116.0" text="Problemes released:" HBox.hgrow="ALWAYS" />
+                        <Label prefHeight="17.0" prefWidth="116.0" text="Problems released:" HBox.hgrow="ALWAYS" />
                         <VBox alignment="CENTER_LEFT" prefWidth="189.0" HBox.hgrow="ALWAYS">
                            <children>
                               <ComboBox fx:id="combo_problemsReleasedDay" editable="true" prefHeight="25.0" prefWidth="1200.0" />
