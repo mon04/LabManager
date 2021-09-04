@@ -33,28 +33,32 @@
                   <Insets top="8.0" />
                </VBox.margin>
             </Separator>
-            <VBox fx:id="vbox_newModule" prefHeight="116.0" prefWidth="372.0" spacing="8.0" VBox.vgrow="ALWAYS">
+            <VBox fx:id="vbox_newModule" alignment="CENTER" prefHeight="116.0" prefWidth="372.0" spacing="8.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label fx:id="label_moduleEditorHeading" text="New module" textFill="#9a9a9a">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
+                  <HBox>
+                     <children>
+                        <Label fx:id="label_moduleEditorHeading" text="New module" textFill="#9a9a9a">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="4.0">
                      <children>
-                        <Label minWidth="-Infinity" prefWidth="45.0" text="Code:" />
+                        <Label minWidth="-Infinity" prefWidth="64.0" text="Code:" />
                         <TextField fx:id="tf_moduleCode" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="34.0" prefWidth="200.0" spacing="4.0">
                      <children>
-                        <Label minWidth="-Infinity" prefWidth="45.0" text="Title:" />
+                        <Label minWidth="-Infinity" prefWidth="64.0" text="Title:" />
                         <TextField fx:id="tf_moduleTitle" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="63.0" prefHeight="160.0" prefWidth="200.0" spacing="4.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" spacing="4.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="64.0" spacing="4.0">
                            <children>
                               <Label minWidth="-Infinity" prefWidth="45.0" text="Weeks:" />
                               <Button fx:id="btn_moduleWeeksEdit" mnemonicParsing="false" onAction="#openWeeksEditor" text="Edit" />
@@ -73,9 +77,9 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="68.0" prefHeight="160.0" prefWidth="200.0" spacing="4.0">
                      <children>
-                        <VBox alignment="CENTER_LEFT" spacing="4.0">
+                        <VBox alignment="CENTER_LEFT" prefWidth="64.0" spacing="4.0">
                            <children>
-                              <Label minWidth="-Infinity" prefWidth="45.0" text="Groups:" />
+                              <Label minWidth="-Infinity" prefHeight="17.0" text="Timed labs:" />
                               <Button fx:id="btn_moduleGroupsEdit" mnemonicParsing="false" onAction="#openGroupsEditor" text="Edit" />
                            </children>
                         </VBox>
@@ -96,60 +100,64 @@
                         <Insets top="8.0" />
                      </padding>
                   </Separator>
-                  <HBox alignment="BASELINE_CENTER" layoutX="10.0" layoutY="36.0" prefWidth="200.0" spacing="4.0">
+                  <VBox maxWidth="-Infinity" prefHeight="154.0" prefWidth="400.0" spacing="8.0">
                      <children>
-                        <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="Problems released:" HBox.hgrow="ALWAYS" />
-                        <VBox alignment="CENTER_LEFT" prefWidth="189.0" HBox.hgrow="ALWAYS">
+                        <HBox alignment="BASELINE_CENTER" prefWidth="200.0" spacing="4.0">
                            <children>
-                              <ComboBox fx:id="combo_problemsReleasedDay" editable="true" minWidth="100.0" onKeyPressed="#comboProblemsReleasedDayKeyPressed" prefHeight="25.0" prefWidth="1200.0" />
-                              <Label text="day of week" textFill="#9a9a9a" />
+                              <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="Problems released:" HBox.hgrow="ALWAYS" />
+                              <VBox alignment="CENTER_LEFT" prefWidth="160.0" HBox.hgrow="NEVER">
+                                 <children>
+                                    <ComboBox fx:id="combo_problemsReleasedDay" editable="true" minWidth="100.0" onKeyPressed="#comboProblemsReleasedDayKeyPressed" prefHeight="25.0" prefWidth="1200.0" />
+                                    <Label text="day of week" textFill="#9a9a9a" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
+                                 <children>
+                                    <TextField fx:id="tf_problemsReleasedTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
+                                    <Label text="time" textFill="#9a9a9a" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefWidth="200.0" spacing="4.0">
                            <children>
-                              <TextField fx:id="tf_problemsReleasedTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
-                              <Label text="time" textFill="#9a9a9a" />
+                              <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="CA evaluation ends:" HBox.hgrow="ALWAYS" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="160.0" HBox.hgrow="NEVER">
+                                 <children>
+                                    <ComboBox fx:id="combo_caEvaluationEndsDay" editable="true" minWidth="100.0" onKeyPressed="#comboCaEvaluationEndsDayKeyPressed" prefHeight="25.0" prefWidth="1200.0" promptText="Wednesday" />
+                                    <Label text="day of week" textFill="#9a9a9a" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="43.0" prefWidth="50.0">
+                                 <children>
+                                    <TextField fx:id="tf_caEvaluationEndsTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
+                                    <Label text="time" textFill="#9a9a9a" />
+                                 </children>
+                              </VBox>
                            </children>
-                        </VBox>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" prefWidth="200.0" spacing="4.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="Problems disappear:" HBox.hgrow="ALWAYS" />
+                              <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="160.0" HBox.hgrow="NEVER">
+                                 <children>
+                                    <DatePicker fx:id="date_problemsDisappear" editable="false" minWidth="100.0" prefHeight="25.0" />
+                                    <Label text="date" textFill="#9a9a9a" />
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
+                                 <children>
+                                    <TextField fx:id="tf_problemsDisappearTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
+                                    <Label text="time" textFill="#9a9a9a" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
-                     <VBox.margin>
-                        <Insets top="8.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="309.0" prefWidth="200.0" spacing="4.0">
-                     <children>
-                        <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="CA evaluation ends:" HBox.hgrow="ALWAYS" />
-                        <VBox alignment="CENTER_LEFT" prefWidth="189.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <ComboBox fx:id="combo_caEvaluationEndsDay" editable="true" minWidth="100.0" onKeyPressed="#comboCaEvaluationEndsDayKeyPressed" prefHeight="25.0" prefWidth="1200.0" />
-                              <Label text="day of week" textFill="#9a9a9a" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="43.0" prefWidth="50.0">
-                           <children>
-                              <TextField fx:id="tf_caEvaluationEndsTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
-                              <Label text="time" textFill="#9a9a9a" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="BASELINE_LEFT" layoutX="10.0" layoutY="335.0" prefWidth="200.0" spacing="4.0">
-                     <children>
-                        <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="Problems disappear:" HBox.hgrow="ALWAYS" />
-                        <VBox alignment="CENTER_LEFT" prefWidth="189.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <DatePicker fx:id="date_problemsDisappear" editable="false" minWidth="100.0" prefHeight="25.0" prefWidth="1200.0" />
-                              <Label text="date" textFill="#9a9a9a" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
-                           <children>
-                              <TextField fx:id="tf_problemsDisappearTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
-                              <Label text="time" textFill="#9a9a9a" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets top="8.0" />
