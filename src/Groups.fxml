@@ -50,12 +50,15 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="table_groups" onKeyPressed="#tableGroupsKeyPressed" prefHeight="173.0" prefWidth="372.0">
+            <TableView fx:id="table_groups" onKeyPressed="#tableGroupsKeyPressed" prefHeight="173.0" prefWidth="372.0" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn prefWidth="108.66668701171875" text="Day" />
-                <TableColumn prefWidth="86.0" text="Time" />
-                  <TableColumn prefWidth="175.3333740234375" text="Group name" />
+                <TableColumn fx:id="tableColumn_groups_day" prefWidth="108.0" text="Day" />
+                <TableColumn fx:id="tableColumn_groups_time" prefWidth="86.0" text="Time" />
+                  <TableColumn fx:id="tableColumn_groups_groupName" prefWidth="175.0" text="Group name" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
             <HBox alignment="CENTER_LEFT" prefWidth="200.0">
                <children>

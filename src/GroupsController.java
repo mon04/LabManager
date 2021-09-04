@@ -1,17 +1,26 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class GroupsController {
+import java.net.URL;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.ResourceBundle;
 
-    public TableView table_groups;
+public class GroupsController implements Initializable {
+
+    public TableView<LabSession> table_groups;
     public TextField tf_groupName;
-    public ComboBox combo_day;
+    public TableColumn<LabSession, String> tableColumn_groups_day;
+    public TableColumn<LabSession, String> tableColumn_groups_time;
+    public TableColumn<LabSession, String> tableColumn_groups_groupName;
+    public ComboBox<String> combo_day;
     public TextField tf_startTime;
     public Button btn_deleteGroup;
     public Button btn_addGroup;
@@ -21,11 +30,30 @@ public class GroupsController {
     public Button btn_saveAll;
 
 
+    ObservableList<LabSession> sessions;
+
+    public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("Initializing GroupsController");
+
+        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("day"));
+        tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
+
+        sessions = FXCollections.observableArrayList();
+        sessions.setAll(getTestSessions());
+        table_groups.setItems(sessions);
+
+    }
+
+
     public void deleteGroup(ActionEvent actionEvent) {
     }
 
     public void addGroup(ActionEvent actionEvent) {
     }
+
+
+
 
     public void cancelGroupEdit(ActionEvent actionEvent) {
     }
@@ -44,5 +72,24 @@ public class GroupsController {
         //switch(keyEvent.getCode()) {
             //If DELETE key, remove group
         //}
+    }
+
+    public ObservableList<LabSession> getTestSessions() {
+
+        ObservableList<LabSession> testSessions = FXCollections.observableArrayList();
+        testSessions.add(new LabSession(
+                "red", 90, DayOfWeek.THURSDAY, LocalTime.of(9,30
+        )));
+        testSessions.add(new LabSession(
+                "blue", 90, DayOfWeek.THURSDAY, LocalTime.of(11,10
+        )));
+        testSessions.add(new LabSession(
+                "green", 90, DayOfWeek.FRIDAY, LocalTime.of(10,0
+        )));
+        testSessions.add(new LabSession(
+                "yellow", 90, DayOfWeek.FRIDAY, LocalTime.of(11,40
+        )));
+
+        return testSessions;
     }
 }
