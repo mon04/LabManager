@@ -25,6 +25,7 @@ import java.util.*;
 
 public class RootController implements Initializable {
 
+
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
     ObservableList<String> moduleFullTitles = FXCollections.observableArrayList();
     ObservableList<String> days = FXCollections.observableArrayList();
@@ -67,10 +68,10 @@ public class RootController implements Initializable {
         updateModuleList();
 
         //Set placeholders for empty 'Weeks' and 'Groups' listViews
-        list_moduleWeeks.setPlaceholder(new Label(String.format("Click '%s' to add weeks", btn_moduleWeeksEdit.getText())));
-        list_moduleWeeks.getPlaceholder().setOpacity(0.5);
-        list_moduleGroups.setPlaceholder(new Label(String.format("Click '%s' to add groups", btn_moduleGroupsEdit.getText())));
-        list_moduleGroups.getPlaceholder().setOpacity(0.5);
+        //list_moduleWeeks.setPlaceholder(new Label(String.format("Click '%s' to add weeks", btn_moduleWeeksEdit.getText())));
+        //list_moduleWeeks.getPlaceholder().setOpacity(0.5);
+        //list_moduleGroups.setPlaceholder(new Label(String.format("Click '%s' to add groups", btn_moduleGroupsEdit.getText())));
+        //list_moduleGroups.getPlaceholder().setOpacity(0.5);
 
     }
 
@@ -278,14 +279,17 @@ public class RootController implements Initializable {
     @FXML
     private TextField tf_moduleTitle;
 
+
     @FXML
-    private ListView<String> list_moduleWeeks;
+    private TableView table_groups;
+    //private ListView<String> list_moduleWeeks;
 
     @FXML
     private Button btn_moduleWeeksEdit;
 
     @FXML
-    private ListView<String> list_moduleGroups;
+    private TableView table_weeks;
+    //private ListView<String> list_moduleGroups;
 
     @FXML
     private Button btn_moduleGroupsEdit;
