@@ -2,13 +2,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -108,8 +113,17 @@ public class RootController implements Initializable {
     }
 
     @FXML
-    void openGroupsEditor(ActionEvent event) {
+    void openGroupsEditor(ActionEvent event) throws IOException {
+        System.out.println("Opening Groups window");
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Groups.fxml"));
+        Parent root = loader.load();
+        GroupsController groupsController = loader.getController();
+
+        Stage stage = new Stage();
+        stage.setTitle("LabManager - Groups");
+        stage.setScene(new Scene(root));
+        stage.showAndWait();
     }
 
     @FXML
