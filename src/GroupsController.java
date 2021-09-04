@@ -1,8 +1,11 @@
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class GroupsController {
 
@@ -28,5 +31,12 @@ public class GroupsController {
     }
 
     public void saveGroupEdit(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    void comboGroupsDayKeyPressed(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER) {
+            combo_day.show();
+        }
     }
 }

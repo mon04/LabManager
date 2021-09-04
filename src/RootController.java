@@ -25,11 +25,46 @@ import java.util.*;
 
 public class RootController implements Initializable {
 
+    @FXML
+    private ListView<String> list_savedModules;
+    @FXML
+    private VBox vbox_newModule;
+    @FXML
+    private Label label_moduleEditorHeading;
+    @FXML
+    private TextField tf_moduleCode;
+    @FXML
+    private TextField tf_moduleTitle;
+    @FXML
+    private TableView table_groups;
+    //private ListView<String> list_moduleWeeks;
+    @FXML
+    private Button btn_moduleWeeksEdit;
+    @FXML
+    private TableView table_weeks;
+    //private ListView<String> list_moduleGroups;
+    @FXML
+    private Button btn_moduleGroupsEdit;
+    @FXML
+    private ComboBox<String> combo_problemsReleasedDay;
+    @FXML
+    private TextField tf_problemsReleasedTime;
+    @FXML
+    private ComboBox<String> combo_caEvaluationEndsDay;
+    @FXML
+    private TextField tf_caEvaluationEndsTime;
+    @FXML
+    private DatePicker date_problemsDisappear;
+    @FXML
+    private TextField tf_problemsDisappearTime;
+    @FXML
+    private Button btn_saveModule;
+    @FXML
+    private Button btn_deleteModule;
 
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
     ObservableList<String> moduleFullTitles = FXCollections.observableArrayList();
     ObservableList<String> days = FXCollections.observableArrayList();
-
 
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -263,59 +298,5 @@ public class RootController implements Initializable {
         LocalTime problemsDisappearTime = LocalTime.parse(tf_problemsDisappearTime.getText());
         target.setProblemsDisappear(LocalDateTime.of(problemsDisappearDate, problemsDisappearTime));
     }
-
-    @FXML
-    private ListView<String> list_savedModules;
-
-    @FXML
-    private VBox vbox_newModule;
-
-    @FXML
-    private Label label_moduleEditorHeading;
-
-    @FXML
-    private TextField tf_moduleCode;
-
-    @FXML
-    private TextField tf_moduleTitle;
-
-
-    @FXML
-    private TableView table_groups;
-    //private ListView<String> list_moduleWeeks;
-
-    @FXML
-    private Button btn_moduleWeeksEdit;
-
-    @FXML
-    private TableView table_weeks;
-    //private ListView<String> list_moduleGroups;
-
-    @FXML
-    private Button btn_moduleGroupsEdit;
-
-    @FXML
-    private ComboBox<String> combo_problemsReleasedDay;
-
-    @FXML
-    private TextField tf_problemsReleasedTime;
-
-    @FXML
-    private ComboBox<String> combo_caEvaluationEndsDay;
-
-    @FXML
-    private TextField tf_caEvaluationEndsTime;
-
-    @FXML
-    private DatePicker date_problemsDisappear;
-
-    @FXML
-    private TextField tf_problemsDisappearTime;
-
-    @FXML
-    private Button btn_saveModule;
-
-    @FXML
-    private Button btn_deleteModule;
 
 }
