@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -120,9 +121,12 @@ public class RootController implements Initializable {
         Parent root = loader.load();
         GroupsController groupsController = loader.getController();
 
+        groupsController.combo_day.setItems(days);
+
         Stage stage = new Stage();
         stage.setTitle("LabManager - Groups");
         stage.setScene(new Scene(root));
+        stage.getIcons().add(new Image("/media/icon.png"));
         stage.showAndWait();
     }
 
