@@ -39,4 +39,10 @@ public class GroupsController {
             combo_day.show();
         }
     }
+
+    public void tableGroupsKeyPressed(KeyEvent keyEvent) {
+        //switch(keyEvent.getCode()) {
+            //If DELETE key, remove group
+        //}
+    }
 }
