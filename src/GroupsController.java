@@ -60,6 +60,48 @@ public class GroupsController implements Initializable {
 
     @FXML
     public void addGroup(ActionEvent actionEvent) {
+
+        int existingIndex;
+        if((existingIndex = getSessionIndex(tf_groupName.getText())) != -1) {
+            System.out.println("Overwriting: "+tf_groupName.getText());
+            sessions.remove(existingIndex);
+            sessions.add(existingIndex, newSessionFromData());
+        }
+        else {
+            sessions.add(newSessionFromData());
+        }
+        updateGroupsTable();
+    }
+
+    public LabSession getSession(String groupName) {
+
+        for(LabSession s: sessions) {
+            if(s.getGroupName().equalsIgnoreCase(groupName)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public int getSessionIndex(String groupName) {
+        for(int i = 0; i < sessions.size(); i++) {
+            LabSession s = sessions.get(i);
+            if(s.getGroupName().equalsIgnoreCase(groupName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public LabSession newSessionFromData() {
+
+        //Length will be set to 0. Real value must be assigned when user clicks 'Save all'
+        return new LabSession(
+                tf_groupName.getText(),
+                0,
+                DayOfWeek.of(combo_day.getSelectionModel().getSelectedIndex()+1),
+                LocalTime.parse(tf_startTime.getText())
+        );
     }
 
 
