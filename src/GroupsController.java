@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.DayOfWeek;
@@ -122,9 +123,27 @@ public class GroupsController implements Initializable {
     }
 
     @FXML
+    public void tableGroupsMouseClicked(MouseEvent mouseEvent) {
+        setGroupEditor();
+    }
+
+    @FXML
     public void tableGroupsKeyPressed(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.DELETE) {
             deleteSelectedGroup();
+        }
+    }
+
+    public void setGroupEditor() {
+
+        int selectedIndex = table_groups.getSelectionModel().getSelectedIndex();
+
+        if(selectedIndex > -1) {
+            LabSession s = sessions.get(selectedIndex);
+
+            tf_groupName.setText(s.getGroupName());
+            combo_day.setValue(s.getDayFormatted());
+            tf_startTime.setText(s.getStartTime().toString());
         }
     }
 
@@ -151,4 +170,6 @@ public class GroupsController implements Initializable {
 
         return testSessions;
     }
+
+
 }
