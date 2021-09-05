@@ -148,8 +148,9 @@ public class RootController implements Initializable {
         if(selectedIndex > -1) {
 
             if(moduleExists(tf_moduleCode.getText())) {
-                moduleObjects.remove(selectedIndex);
-                moduleObjects.add(selectedIndex, newModuleFromData());
+                int existingIndex = getModuleIndex(tf_moduleCode.getText());
+                moduleObjects.remove(existingIndex);
+                moduleObjects.add(existingIndex, newModuleFromData());
             }
             else {
                 moduleObjects.add(newModuleFromData());
