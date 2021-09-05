@@ -64,7 +64,7 @@ public class RootController implements Initializable {
 
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
     ObservableList<String> moduleFullTitles = FXCollections.observableArrayList();
-    public static ObservableList<String> days = FXCollections.observableArrayList();
+    public static ObservableList<String> daysFormatted = FXCollections.observableArrayList();
 
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -73,10 +73,10 @@ public class RootController implements Initializable {
 
         //Set items for 'day of week' combo boxes
         for(DayOfWeek d : DayOfWeek.values()) {
-            days.add(d.getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            daysFormatted.add(d.getDisplayName(TextStyle.FULL, Locale.ENGLISH));
         }
-        combo_problemsReleasedDay.setItems(days);
-        combo_caEvaluationEndsDay.setItems(days);
+        combo_problemsReleasedDay.setItems(daysFormatted);
+        combo_caEvaluationEndsDay.setItems(daysFormatted);
 
         //Default "New" module
         moduleObjects.add(new Module("New"));
@@ -151,7 +151,7 @@ public class RootController implements Initializable {
 
     @FXML
     void openGroupsEditor(ActionEvent event) throws IOException {
-        System.out.println("Opening Groups window");
+        System.out.println("Opening Groups window...");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Groups.fxml"));
         Parent root = loader.load();

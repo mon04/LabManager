@@ -33,8 +33,10 @@ public class GroupsController implements Initializable {
     ObservableList<LabSession> sessions;
 
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Initializing GroupsController");
-        combo_day.setItems(RootController.days);
+
+        System.out.println("Initializing Groups Controller...");
+
+        combo_day.setItems(RootController.daysFormatted);
 
         tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("dayFormatted"));
         tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
@@ -46,19 +48,27 @@ public class GroupsController implements Initializable {
 
     }
 
-
-    public void deleteGroup(ActionEvent actionEvent) {
+    @FXML
+    public void deleteButtonAction(ActionEvent actionEvent) {
+        deleteSelectedGroup();
     }
 
+    public void deleteSelectedGroup() {
+        sessions.remove(table_groups.getSelectionModel().getSelectedIndex());
+        updateGroupsTable();
+    }
+
+    @FXML
     public void addGroup(ActionEvent actionEvent) {
     }
 
 
 
-
+    @FXML
     public void cancelGroupEdit(ActionEvent actionEvent) {
     }
 
+    @FXML
     public void saveGroupEdit(ActionEvent actionEvent) {
     }
 
@@ -69,14 +79,20 @@ public class GroupsController implements Initializable {
         }
     }
 
+    @FXML
     public void tableGroupsKeyPressed(KeyEvent keyEvent) {
-        //switch(keyEvent.getCode()) {
-            //If DELETE key, remove group
-        //}
+        if(keyEvent.getCode() == KeyCode.DELETE) {
+            deleteSelectedGroup();
+        }
+    }
+
+    public void updateGroupsTable() {
+        table_groups.setItems(sessions);
     }
 
     public ObservableList<LabSession> getTestSessions() {
 
+        //Get an Ob. List of placeholder sessions to fill table with
         ObservableList<LabSession> testSessions = FXCollections.observableArrayList();
         testSessions.add(new LabSession(
                 "red", 90, DayOfWeek.THURSDAY, LocalTime.of(9,30
