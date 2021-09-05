@@ -132,6 +132,9 @@ public class GroupsController implements Initializable {
         if(keyEvent.getCode() == KeyCode.DELETE) {
             deleteSelectedGroup();
         }
+        if(keyEvent.getCode() == KeyCode.DOWN || keyEvent.getCode() == KeyCode.UP) {
+            setGroupEditor();
+        }
     }
 
     public void setGroupEditor() {

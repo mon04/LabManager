@@ -12,39 +12,6 @@
             <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
          </padding>
          <children>
-            <HBox prefWidth="200.0">
-               <children>
-                  <VBox prefHeight="43.0" prefWidth="112.0">
-                     <children>
-                        <Label prefHeight="17.0" prefWidth="126.0" text="Length of each lab:" />
-                     </children>
-                     <padding>
-                        <Insets top="3.0" />
-                     </padding>
-                  </VBox>
-                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="4.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <VBox prefWidth="40.0">
-                           <children>
-                              <TextField fx:id="tf_labLengthHours" prefWidth="40.0" />
-                              <Label text="hours" textFill="#9a9a9a" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="10.0" prefWidth="40.0">
-                           <children>
-                              <TextField fx:id="tf_labLengthMin" prefWidth="40.0" />
-                              <Label text="min" textFill="#9a9a9a" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
-            <Separator prefWidth="200.0">
-               <padding>
-                  <Insets bottom="8.0" />
-               </padding>
-            </Separator>
             <Label text="Groups" textFill="#9a9a9a">
                <font>
                   <Font size="16.0" />
@@ -89,6 +56,34 @@
                   <Insets top="8.0" />
                </padding>
             </Separator>
+            <HBox prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="43.0" prefWidth="112.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="126.0" text="Length of each lab:" />
+                     </children>
+                     <padding>
+                        <Insets top="3.0" />
+                     </padding>
+                  </VBox>
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox prefWidth="40.0">
+                           <children>
+                              <TextField fx:id="tf_labLengthHours" prefWidth="40.0" />
+                              <Label text="hours" textFill="#9a9a9a" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="10.0" prefWidth="40.0">
+                           <children>
+                              <TextField fx:id="tf_labLengthMin" prefWidth="40.0" />
+                              <Label text="min" textFill="#9a9a9a" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
             <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="4.0">
                <children>
                   <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#cancelGroupEdit" prefHeight="30.0" prefWidth="52.0" text="Cancel" />
