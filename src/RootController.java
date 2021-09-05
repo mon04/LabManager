@@ -80,34 +80,10 @@ public class RootController implements Initializable {
 
         //Default "New" module
         moduleObjects.add(new Module("New"));
-
-        //Add some test Modules
-        moduleObjects.add(new Module(
-                "Introduction to Programming 1",
-                "CS161",
-                new ArrayList<LabSession>(),
-                new ArrayList<Week>(),
-                new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,30)),
-                new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(18,0)),
-                LocalDateTime.of(2022,8,31,23,59)
-        ));
-        moduleObjects.add(new Module(
-                "Computer Systems 1",
-                "CS171",
-                new ArrayList<LabSession>(),
-                new ArrayList<Week>(),
-                new DayOfWeekAndTime(DayOfWeek.TUESDAY, LocalTime.of(12,0)),
-                new DayOfWeekAndTime(DayOfWeek.SUNDAY, LocalTime.of(15,0)),
-                LocalDateTime.of(2022,8,31,23,59)
-        ));
         updateModuleList();
 
-        //Set placeholders for empty 'Weeks' and 'Groups' listViews
-        //list_moduleWeeks.setPlaceholder(new Label(String.format("Click '%s' to add weeks", btn_moduleWeeksEdit.getText())));
-        //list_moduleWeeks.getPlaceholder().setOpacity(0.5);
-        //list_moduleGroups.setPlaceholder(new Label(String.format("Click '%s' to add groups", btn_moduleGroupsEdit.getText())));
-        //list_moduleGroups.getPlaceholder().setOpacity(0.5);
-
+        //Add some test modules
+        addTestModules(moduleObjects);
     }
 
     @FXML
@@ -118,35 +94,6 @@ public class RootController implements Initializable {
     @FXML
     void moduleListKeyPressed(KeyEvent event) {
         setModuleEditor();
-    }
-
-    void setModuleEditor() {
-
-        int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
-        if(selectedIndex > -1) {
-
-            vbox_newModule.setDisable(false);
-
-            Module selectedModule = moduleObjects.get(selectedIndex);
-
-            //Disable 'Delete module' btn for "New"
-            if(selectedIndex == 0) btn_deleteModule.setDisable(true);
-            else btn_deleteModule.setDisable(false);
-
-            label_moduleEditorHeading.setText(selectedModule.getFullTitle());
-
-            tf_moduleCode.setText(selectedModule.getCode());
-            tf_moduleTitle.setText(selectedModule.getTitle());
-
-            combo_problemsReleasedDay.setValue(selectedModule.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-            tf_problemsReleasedTime.setText(selectedModule.getProblemsReleased().getTime().toString());
-
-            combo_caEvaluationEndsDay.setValue(selectedModule.getCaEvaluationEnds().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-            tf_caEvaluationEndsTime.setText(selectedModule.getCaEvaluationEnds().getTime().toString());
-
-            date_problemsDisappear.setValue(selectedModule.getProblemsDisappear().toLocalDate());
-            tf_problemsDisappearTime.setText(selectedModule.getProblemsDisappear().toLocalTime().toString());
-        }
     }
 
     @FXML
@@ -196,33 +143,63 @@ public class RootController implements Initializable {
 
     @FXML
     void saveModule(ActionEvent event) {
+
         int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
         if(selectedIndex > -1) {
 
-            Module module = moduleObjects.get(selectedIndex);
-
             if(moduleExists(tf_moduleCode.getText())) {
-                setModuleData(getModule(tf_moduleCode.getText()));
-                label_moduleEditorHeading.setText(module.getFullTitle());
+                moduleObjects.remove(selectedIndex);
+                moduleObjects.add(selectedIndex, newModuleFromData());
             }
             else {
-                Module newModule = newModuleFromData();
-                moduleObjects.add(newModule);
-                label_moduleEditorHeading.setText(newModule.getFullTitle());
+                moduleObjects.add(newModuleFromData());
             }
 
+            label_moduleEditorHeading.setText(moduleObjects.get(selectedIndex).getFullTitle());
         }
         updateModuleList();
     }
 
-    public Module getModule(String code) {
+    public void setModuleEditor() {
 
-        for(Module m : moduleObjects) {
+        int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
+        if(selectedIndex > -1) {
+
+            vbox_newModule.setDisable(false);
+
+            Module selectedModule = moduleObjects.get(selectedIndex);
+
+            //Disable 'Delete module' btn for "New"
+            if(selectedIndex == 0) btn_deleteModule.setDisable(true);
+            else btn_deleteModule.setDisable(false);
+
+            label_moduleEditorHeading.setText(selectedModule.getFullTitle());
+
+            tf_moduleCode.setText(selectedModule.getCode());
+            tf_moduleTitle.setText(selectedModule.getTitle());
+
+            combo_problemsReleasedDay.setValue(selectedModule.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            tf_problemsReleasedTime.setText(selectedModule.getProblemsReleased().getTime().toString());
+
+            combo_caEvaluationEndsDay.setValue(selectedModule.getCaEvaluationEnds().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+            tf_caEvaluationEndsTime.setText(selectedModule.getCaEvaluationEnds().getTime().toString());
+
+            date_problemsDisappear.setValue(selectedModule.getProblemsDisappear().toLocalDate());
+            tf_problemsDisappearTime.setText(selectedModule.getProblemsDisappear().toLocalTime().toString());
+        }
+    }
+
+    public int getModuleIndex(String code) {
+
+        for(int i = 0; i < moduleObjects.size(); i++) {
+
+            Module m = moduleObjects.get(i);
+
             if(m.getCode().equalsIgnoreCase(code)) {
-                return m;
+                return i;
             }
         }
-        return moduleObjects.get(0);
+        return -1;
     }
 
     public void updateModuleList() {
@@ -270,31 +247,45 @@ public class RootController implements Initializable {
 
     public Module newModuleFromData() {
 
-        Module newModule = new Module();
-        setModuleData(newModule);
-        newModule.setCode(tf_moduleCode.getText());
-        return newModule;
+        DayOfWeek problemsReleasedDay = DayOfWeek.of(combo_problemsReleasedDay.getSelectionModel().getSelectedIndex()+1);
+        DayOfWeek caEvaluationEndsDay = DayOfWeek.of(combo_caEvaluationEndsDay.getSelectionModel().getSelectedIndex()+1);
+
+        return new Module(
+                tf_moduleTitle.getText(),
+                tf_moduleCode.getText(),
+                new ArrayList<LabSession>(),
+                new ArrayList<Week>(),
+                new DayOfWeekAndTime(problemsReleasedDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
+                new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
+                LocalDateTime.of(date_problemsDisappear.getValue(), LocalTime.parse(tf_problemsDisappearTime.getText()))
+        );
     }
 
-    public void setModuleData(Module target) {
-        target.setTitle(tf_moduleTitle.getText());
 
-        //DayOfWeekAndTime problemsReleased
-        int selectedIndex = combo_problemsReleasedDay.getSelectionModel().getSelectedIndex();
-        DayOfWeek problemsReleasedDay = DayOfWeek.of(selectedIndex+1);
-        LocalTime problemsReleasedTime = LocalTime.parse(tf_problemsReleasedTime.getText());
-        target.setProblemsReleased(new DayOfWeekAndTime(problemsReleasedDay, problemsReleasedTime));
+    // Testing
+    public void addTestModules(ArrayList<Module> destination) {
 
-        //DayOfWeekAndTime caEvaluationEnds
-        selectedIndex = combo_caEvaluationEndsDay.getSelectionModel().getSelectedIndex();
-        DayOfWeek caEvaluationEndsDay = DayOfWeek.of(selectedIndex+1);
-        LocalTime caEvaluationEndsTime = LocalTime.parse(tf_caEvaluationEndsTime.getText());
-        target.setCaEvaluationEnds(new DayOfWeekAndTime(caEvaluationEndsDay, caEvaluationEndsTime));
+        destination.add(new Module(
+                "Introduction to Programming 1",
+                "CS161",
+                new ArrayList<LabSession>(),
+                new ArrayList<Week>(),
+                new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,30)),
+                new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(18,0)),
+                LocalDateTime.of(2022,8,31,23,59)
+        ));
+        destination.add(new Module(
+                "Computer Systems 1",
+                "CS171",
+                new ArrayList<LabSession>(),
+                new ArrayList<Week>(),
+                new DayOfWeekAndTime(DayOfWeek.TUESDAY, LocalTime.of(12,0)),
+                new DayOfWeekAndTime(DayOfWeek.SUNDAY, LocalTime.of(15,0)),
+                LocalDateTime.of(2022,8,31,23,59)
+        ));
 
-        //LocalDateTime problemsDisappear
-        LocalDate problemsDisappearDate = date_problemsDisappear.getValue();
-        LocalTime problemsDisappearTime = LocalTime.parse(tf_problemsDisappearTime.getText());
-        target.setProblemsDisappear(LocalDateTime.of(problemsDisappearDate, problemsDisappearTime));
+        updateModuleList();
+
     }
 
 }

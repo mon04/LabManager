@@ -30,7 +30,7 @@ public class GroupsController implements Initializable {
     public Button btn_cancel;
     public Button btn_saveAll;
 
-
+    //Needs access modifier?
     ObservableList<LabSession> sessions;
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,11 +54,6 @@ public class GroupsController implements Initializable {
         deleteSelectedGroup();
     }
 
-    public void deleteSelectedGroup() {
-        sessions.remove(table_groups.getSelectionModel().getSelectedIndex());
-        updateGroupsTable();
-    }
-
     @FXML
     public void addGroup(ActionEvent actionEvent) {
 
@@ -74,39 +69,6 @@ public class GroupsController implements Initializable {
         updateGroupsTable();
     }
 
-    public LabSession getSession(String groupName) {
-
-        for(LabSession s: sessions) {
-            if(s.getGroupName().equalsIgnoreCase(groupName)) {
-                return s;
-            }
-        }
-        return null;
-    }
-
-    public int getSessionIndex(String groupName) {
-        for(int i = 0; i < sessions.size(); i++) {
-            LabSession s = sessions.get(i);
-            if(s.getGroupName().equalsIgnoreCase(groupName)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public LabSession newSessionFromData() {
-
-        //Length will be set to 0. Real value must be assigned when user clicks 'Save all'
-        return new LabSession(
-                tf_groupName.getText(),
-                0,
-                DayOfWeek.of(combo_day.getSelectionModel().getSelectedIndex()+1),
-                LocalTime.parse(tf_startTime.getText())
-        );
-    }
-
-
-
     @FXML
     public void cancelGroupEdit(ActionEvent actionEvent) {
     }
@@ -117,6 +79,7 @@ public class GroupsController implements Initializable {
 
     @FXML
     void comboGroupsDayKeyPressed(KeyEvent event) {
+
         if(event.getCode() == KeyCode.ENTER) {
             combo_day.show();
         }
@@ -129,6 +92,7 @@ public class GroupsController implements Initializable {
 
     @FXML
     public void tableGroupsKeyPressed(KeyEvent keyEvent) {
+
         if(keyEvent.getCode() == KeyCode.DELETE) {
             deleteSelectedGroup();
         }
@@ -154,6 +118,34 @@ public class GroupsController implements Initializable {
         table_groups.setItems(sessions);
     }
 
+    public int getSessionIndex(String groupName) {
+        for(int i = 0; i < sessions.size(); i++) {
+            LabSession s = sessions.get(i);
+            if(s.getGroupName().equalsIgnoreCase(groupName)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public LabSession newSessionFromData() {
+
+        //Length will be set to 0. Real value must be assigned when user clicks 'Save all'
+        return new LabSession(
+                tf_groupName.getText(),
+                0,
+                DayOfWeek.of(combo_day.getSelectionModel().getSelectedIndex()+1),
+                LocalTime.parse(tf_startTime.getText())
+        );
+    }
+
+    public void deleteSelectedGroup() {
+        sessions.remove(table_groups.getSelectionModel().getSelectedIndex());
+        updateGroupsTable();
+    }
+
+
+    // Testing
     public ObservableList<LabSession> getTestSessions() {
 
         //Get an Ob. List of placeholder sessions to fill table with
@@ -173,6 +165,5 @@ public class GroupsController implements Initializable {
 
         return testSessions;
     }
-
 
 }
