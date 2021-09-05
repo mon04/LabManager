@@ -1,5 +1,7 @@
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class LabSession {
 
@@ -8,11 +10,15 @@ public class LabSession {
 	private DayOfWeek day;
 	private LocalTime startTime;
 
+	private String dayFormatted;
+
 	public LabSession(String groupName, long length, DayOfWeek day, LocalTime startTime) {
 		this.groupName = groupName;
 		this.length = length;
 		this.day = day;
 		this.startTime = startTime;
+
+		dayFormatted = getDayFormatted();
 	}
 
 	public String getGroupName() {
@@ -35,8 +41,13 @@ public class LabSession {
 		return day;
 	}
 
+	public String getDayFormatted() {
+		return day.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+	}
+
 	public void setDay(DayOfWeek day) {
 		this.day = day;
+		dayFormatted = getDayFormatted();
 	}
 
 	public LocalTime getStartTime() {

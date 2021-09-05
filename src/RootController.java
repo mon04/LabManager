@@ -64,7 +64,7 @@ public class RootController implements Initializable {
 
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
     ObservableList<String> moduleFullTitles = FXCollections.observableArrayList();
-    ObservableList<String> days = FXCollections.observableArrayList();
+    public static ObservableList<String> days = FXCollections.observableArrayList();
 
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -156,8 +156,6 @@ public class RootController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Groups.fxml"));
         Parent root = loader.load();
         GroupsController groupsController = loader.getController();
-
-        groupsController.combo_day.setItems(days);
 
         Stage stage = new Stage();
         stage.setTitle("LabManager - Groups");

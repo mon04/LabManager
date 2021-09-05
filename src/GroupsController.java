@@ -34,8 +34,9 @@ public class GroupsController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Initializing GroupsController");
+        combo_day.setItems(RootController.days);
 
-        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("day"));
+        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("dayFormatted"));
         tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
 
