@@ -12,9 +12,10 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class GroupsController implements Initializable {
+public class GroupsController {
 
     public TableView<LabSession> table_groups;
     public TextField tf_groupName;
@@ -29,25 +30,11 @@ public class GroupsController implements Initializable {
     public TextField tf_labLengthMin;
     public Button btn_cancel;
     public Button btn_saveAll;
+    public Label label_groupsEditorHeading;
 
-    //Needs access modifier?
-    ObservableList<LabSession> sessions;
+    private Module module;
+    private ObservableList<LabSession> sessions = FXCollections.observableArrayList();
 
-    public void initialize(URL url, ResourceBundle rb) {
-
-        System.out.println("Initializing Groups Controller...");
-
-        combo_day.setItems(RootController.daysFormatted);
-
-        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("dayFormatted"));
-        tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-        tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
-
-        sessions = FXCollections.observableArrayList();
-        sessions.setAll(getTestSessions());
-        table_groups.setItems(sessions);
-
-    }
 
     @FXML
     public void deleteButtonAction(ActionEvent actionEvent) {
@@ -60,13 +47,14 @@ public class GroupsController implements Initializable {
         int existingIndex;
         if((existingIndex = getSessionIndex(tf_groupName.getText())) != -1) {
             System.out.println("Overwriting: "+tf_groupName.getText());
+            //System.out.println("  Removing: "+sessions.get(existingIndex).getGroupName());
             sessions.remove(existingIndex);
             sessions.add(existingIndex, newSessionFromData());
         }
         else {
             sessions.add(newSessionFromData());
         }
-        updateGroupsTable();
+        //updateGroupsTable();
     }
 
     @FXML
@@ -101,6 +89,28 @@ public class GroupsController implements Initializable {
         }
     }
 
+    public void setModule(Module module) {
+        this.module = module;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void set(Module m) {
+
+        setModule(m);
+        label_groupsEditorHeading.setText(m.getFullTitle());
+        sessions.addAll(module.getLabSessions());
+
+        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("dayFormatted"));
+        tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
+        table_groups.setItems(sessions);
+
+        combo_day.setItems(RootController.daysFormatted);
+    }
+
     public void setGroupEditor() {
 
         int selectedIndex = table_groups.getSelectionModel().getSelectedIndex();
@@ -112,10 +122,6 @@ public class GroupsController implements Initializable {
             combo_day.setValue(s.getDayFormatted());
             tf_startTime.setText(s.getStartTime().toString());
         }
-    }
-
-    public void updateGroupsTable() {
-        table_groups.setItems(sessions);
     }
 
     public int getSessionIndex(String groupName) {
@@ -141,7 +147,7 @@ public class GroupsController implements Initializable {
 
     public void deleteSelectedGroup() {
         sessions.remove(table_groups.getSelectionModel().getSelectedIndex());
-        updateGroupsTable();
+        //updateGroupsTable();
     }
 
 

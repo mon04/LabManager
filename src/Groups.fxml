@@ -12,7 +12,7 @@
             <Insets bottom="14.0" left="14.0" right="14.0" top="14.0" />
          </padding>
          <children>
-            <Label text="Groups" textFill="#9a9a9a">
+            <Label fx:id="label_groupsEditorHeading" text="Groups" textFill="#9a9a9a">
                <font>
                   <Font size="16.0" />
                </font>

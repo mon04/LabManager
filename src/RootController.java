@@ -64,6 +64,7 @@ public class RootController implements Initializable {
 
     private ArrayList<Module> moduleObjects = new ArrayList<Module>();
     ObservableList<String> moduleFullTitles = FXCollections.observableArrayList();
+
     public static ObservableList<String> daysFormatted = FXCollections.observableArrayList();
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -104,11 +105,22 @@ public class RootController implements Initializable {
         Parent root = loader.load();
         GroupsController groupsController = loader.getController();
 
+        groupsController.set(getSelectedModule());
+        System.out.println("Module set in GroupsController: "+groupsController.getModule().getFullTitle());
+
         Stage stage = new Stage();
         stage.setTitle("LabManager - Groups");
         stage.setScene(new Scene(root));
         stage.getIcons().add(new Image("/media/icon.png"));
         stage.showAndWait();
+    }
+
+    public Module getSelectedModule() {
+        int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
+        if(selectedIndex > -1) {
+            return moduleObjects.get(selectedIndex);
+        }
+        return null;
     }
 
     @FXML
@@ -266,15 +278,32 @@ public class RootController implements Initializable {
     // Testing
     public void addTestModules(ArrayList<Module> destination) {
 
+        ArrayList<LabSession> sessions = new ArrayList<>();
+
+        sessions.add(
+                new LabSession("Red", 0, DayOfWeek.THURSDAY, LocalTime.of(9,0))
+        );
+        sessions.add(
+                new LabSession("Blue", 0, DayOfWeek.THURSDAY, LocalTime.of(10,30))
+        );
+        sessions.add(
+                new LabSession("Green", 0, DayOfWeek.FRIDAY, LocalTime.of(9,0))
+        );
+        sessions.add(
+                new LabSession("Yellow", 0, DayOfWeek.FRIDAY, LocalTime.of(10,30))
+        );
+
+
         destination.add(new Module(
                 "Introduction to Programming 1",
                 "CS161",
-                new ArrayList<LabSession>(),
+                sessions,
                 new ArrayList<Week>(),
                 new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,30)),
                 new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(18,0)),
                 LocalDateTime.of(2022,8,31,23,59)
         ));
+
         destination.add(new Module(
                 "Computer Systems 1",
                 "CS171",
