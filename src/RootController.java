@@ -7,14 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +26,8 @@ import java.util.*;
 
 public class RootController implements Initializable {
 
-    public VBox vbox_entireScene;
+    @FXML
+    private VBox vbox_entireScene;
     @FXML
     private ListView<Module> list_savedModules;
     @FXML
@@ -67,6 +67,7 @@ public class RootController implements Initializable {
 
     private ObservableList<Module> modules = FXCollections.observableArrayList();
 
+    // Initialize method
 
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -88,22 +89,7 @@ public class RootController implements Initializable {
         addTestModules(modules);
     }
 
-    public void setCellFactory(ListView<Module> listView) {
-
-        listView.setCellFactory(param -> new ListCell<Module>() {
-            @Override
-            protected void updateItem(Module item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null || item.getFullTitle() == null) {
-                    setText(null);
-                } else {
-                    setText(item.getFullTitle());
-                }
-            }
-        });
-
-    }
+    // FXML methods
 
     @FXML
     void moduleListClicked(MouseEvent e) {
@@ -119,28 +105,19 @@ public class RootController implements Initializable {
     void openGroupsEditor(ActionEvent event) throws IOException {
 
         vbox_entireScene.setDisable(true);
-        System.out.println("Opening Groups window...");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Groups.fxml"));
         Parent root = loader.load();
         GroupsController groupsController = loader.getController();
 
-        groupsController.set(getSelectedModule());
-        System.out.println("Module set in GroupsController: "+groupsController.getModule().getFullTitle());
+        groupsController.setData(getSelectedModule());
+        System.out.println("Opening session editor: "+groupsController.getModule().getCode());
 
         Stage stage = new Stage();
         stage.setTitle("LabManager - Groups");
         stage.setScene(new Scene(root));
         stage.getIcons().add(new Image("/media/icon.png"));
         stage.showAndWait();
-    }
-
-    public Module getSelectedModule() {
-        int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
-        if(selectedIndex > -1) {
-            return modules.get(selectedIndex);
-        }
-        return null;
     }
 
     @FXML
@@ -192,6 +169,8 @@ public class RootController implements Initializable {
 
     }
 
+    // Helper methods
+
     public void setModuleEditor() {
 
         int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
@@ -221,6 +200,29 @@ public class RootController implements Initializable {
         }
     }
 
+    public void setCellFactory(ListView<Module> listView) {
+
+        listView.setCellFactory(param -> new ListCell<Module>() {
+            @Override
+            protected void updateItem(Module item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.getFullTitle() == null) {
+                    setText(null);
+                } else {
+                    setText(item.getFullTitle());
+                }
+            }
+        });
+
+    }
+
+    public void selectModule(int i) {
+
+        list_savedModules.getSelectionModel().select(i);
+        setModuleEditor();
+    }
+
     public int getModuleIndex(String code) {
 
         for(int i = 0; i < modules.size(); i++) {
@@ -235,12 +237,13 @@ public class RootController implements Initializable {
 
     }
 
-    public void selectModule(int i) {
-
-        list_savedModules.getSelectionModel().select(i);
-        setModuleEditor();
+    public Module getSelectedModule() {
+        int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
+        if(selectedIndex > -1) {
+            return modules.get(selectedIndex);
+        }
+        return null;
     }
-
 
     public void sortModules() {
 
@@ -261,7 +264,6 @@ public class RootController implements Initializable {
             }
         }
     }
-
 
     public boolean moduleExists(String code) {
 
@@ -289,8 +291,8 @@ public class RootController implements Initializable {
         );
     }
 
-
     // Testing
+
     public void addTestModules(ObservableList<Module> destination) {
 
         ArrayList<LabSession> sessions = new ArrayList<>();

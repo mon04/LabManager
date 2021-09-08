@@ -2,39 +2,50 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class GroupsController {
 
-    public TableView<LabSession> table_groups;
-    public TextField tf_groupName;
-    public TableColumn<LabSession, String> tableColumn_groups_day;
-    public TableColumn<LabSession, String> tableColumn_groups_time;
-    public TableColumn<LabSession, String> tableColumn_groups_groupName;
-    public ComboBox<String> combo_day;
-    public TextField tf_startTime;
-    public Button btn_deleteGroup;
-    public Button btn_addGroup;
-    public TextField tf_labLengthHours;
-    public TextField tf_labLengthMin;
-    public Button btn_cancel;
-    public Button btn_saveAll;
-    public Label label_groupsEditorHeading;
+    @FXML
+    private TableView<LabSession> table_groups;
+    @FXML
+    private TextField tf_groupName;
+    @FXML
+    private TableColumn<LabSession, String> tableColumn_groups_day;
+    @FXML
+    private TableColumn<LabSession, String> tableColumn_groups_time;
+    @FXML
+    private TableColumn<LabSession, String> tableColumn_groups_groupName;
+    @FXML
+    private ComboBox<String> combo_day;
+    @FXML
+    private TextField tf_startTime;
+    @FXML
+    private Button btn_deleteGroup;
+    @FXML
+    private Button btn_addGroup;
+    @FXML
+    private TextField tf_labLengthHours;
+    @FXML
+    private TextField tf_labLengthMin;
+    @FXML
+    private Button btn_cancel;
+    @FXML
+    private Button btn_saveAll;
+    @FXML
+    private Label label_groupsEditorHeading;
 
     private Module module;
     private ObservableList<LabSession> sessions = FXCollections.observableArrayList();
 
+    //FXML methods
 
     @FXML
     public void deleteButtonAction(ActionEvent actionEvent) {
@@ -88,6 +99,8 @@ public class GroupsController {
         }
     }
 
+    // Helper methods
+
     public void setModule(Module module) {
         this.module = module;
     }
@@ -96,10 +109,12 @@ public class GroupsController {
         return module;
     }
 
-    public void set(Module m) {
+    public void setData(Module m) {
 
         setModule(m);
+
         label_groupsEditorHeading.setText(m.getFullTitle());
+
         sessions.addAll(module.getLabSessions());
 
         tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("dayFormatted"));
@@ -107,10 +122,11 @@ public class GroupsController {
         tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
         table_groups.setItems(sessions);
 
-        combo_day.setItems(RootController.daysFormatted);
     }
 
     public void setGroupEditor() {
+
+        combo_day.setItems(RootController.daysFormatted);
 
         int selectedIndex = table_groups.getSelectionModel().getSelectedIndex();
 
@@ -151,8 +167,8 @@ public class GroupsController {
         sessions.remove(table_groups.getSelectionModel().getSelectedIndex());
     }
 
-
     // Testing
+
     public ObservableList<LabSession> getTestSessions() {
 
         //Get an Ob. List of placeholder sessions to fill table with
