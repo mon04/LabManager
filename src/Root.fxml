@@ -105,11 +105,11 @@
                                     <Button fx:id="btn_moduleGroupsEdit" mnemonicParsing="false" onAction="#openGroupsEditor" text="Edit" />
                                  </children>
                               </VBox>
-                              <TableView fx:id="table_groups" focusTraversable="false" prefHeight="160.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                              <TableView fx:id="table_groups" focusTraversable="false" HBox.hgrow="ALWAYS">
                                 <columns>
-                                  <TableColumn fx:id="tableColumn_groups_day" prefWidth="95.33330285549164" text="Day" />
-                                  <TableColumn fx:id="tableColumn_groups_time" prefWidth="77.00000762939453" text="Time" />
-                                    <TableColumn fx:id="tableColumn_groups_groupName" prefWidth="135.0" text="Group name" />
+                                  <TableColumn fx:id="tableColumn_groups_day" minWidth="-1.0" prefWidth="-1.0" text="Day" />
+                                  <TableColumn fx:id="tableColumn_groups_time" minWidth="-1.0" prefWidth="-1.0" text="Time" />
+                                    <TableColumn fx:id="tableColumn_groups_groupName" minWidth="-1.0" prefWidth="-1.0" text="Group name" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
