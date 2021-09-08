@@ -312,16 +312,16 @@ public class RootController implements Initializable {
         ObservableList<LabSession> sessions = FXCollections.observableArrayList();
 
         sessions.add(
-                new LabSession("Red", 0, DayOfWeek.THURSDAY, LocalTime.of(9,0))
+                new LabSession("Red", 90, DayOfWeek.THURSDAY, LocalTime.of(9,0))
         );
         sessions.add(
-                new LabSession("Blue", 0, DayOfWeek.THURSDAY, LocalTime.of(10,30))
+                new LabSession("Blue", 90, DayOfWeek.THURSDAY, LocalTime.of(10,30))
         );
         sessions.add(
-                new LabSession("Green", 0, DayOfWeek.FRIDAY, LocalTime.of(9,0))
+                new LabSession("Green", 90, DayOfWeek.FRIDAY, LocalTime.of(9,0))
         );
         sessions.add(
-                new LabSession("Yellow", 0, DayOfWeek.FRIDAY, LocalTime.of(10,30))
+                new LabSession("Yellow", 90, DayOfWeek.FRIDAY, LocalTime.of(10,30))
         );
 
 

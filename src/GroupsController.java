@@ -7,6 +7,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -95,10 +96,16 @@ public class GroupsController {
 
     @FXML
     public void cancelGroupEdit(ActionEvent actionEvent) {
+        closeStage();
     }
 
     @FXML
     public void saveGroupEdit(ActionEvent actionEvent) {
+
+        setLabLengths();
+        module.getLabSessions().setAll(sessions);
+
+        closeStage();
     }
 
     // Helper methods
@@ -106,6 +113,8 @@ public class GroupsController {
     public void setData(Module m) {
 
         setModule(m);
+
+        combo_day.setItems(RootController.daysFormatted);
 
         label_groupsEditorHeading.setText(m.getFullTitle());
 
@@ -116,11 +125,11 @@ public class GroupsController {
         tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
         table_groups.setItems(sessions);
 
+        setLabLengthTextFieldContents();
+
     }
 
     public void setGroupEditor() {
-
-        combo_day.setItems(RootController.daysFormatted);
 
         int selectedIndex = table_groups.getSelectionModel().getSelectedIndex();
 
@@ -167,6 +176,32 @@ public class GroupsController {
 
     public void deleteSelectedGroup() {
         sessions.remove(table_groups.getSelectionModel().getSelectedIndex());
+    }
+
+    public void setLabLengthTextFieldContents() {
+
+        if(sessions.size() > 0) {
+
+            long actualMinutes = sessions.get(0).getLength();
+            long hoursComponent = actualMinutes / 60;
+            long minComponent = actualMinutes % 60;
+
+            tf_labLengthHours.setText(String.valueOf(hoursComponent));
+            tf_labLengthMin.setText(String.valueOf(minComponent));
+
+        }
+
+    }
+
+    public void setLabLengths() {
+        for(LabSession s : sessions) {
+            s.setLength(Long.parseLong(tf_labLengthHours.getText()), Long.parseLong(tf_labLengthMin.getText()));
+        }
+    }
+
+    public void closeStage() {
+        Stage stage = (Stage) btn_saveAll.getScene().getWindow();
+        stage.close();
     }
 
     // Testing
