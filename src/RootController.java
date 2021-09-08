@@ -140,7 +140,7 @@ public class RootController implements Initializable {
     }
 
     @FXML
-    void deleteModule(ActionEvent e) {
+    void deleteModule(ActionEvent event) {
 
         int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
         if(selectedIndex > 0) {

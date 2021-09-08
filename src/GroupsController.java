@@ -16,13 +16,13 @@ public class GroupsController {
     @FXML
     private TableView<LabSession> table_groups;
     @FXML
-    private TextField tf_groupName;
-    @FXML
     private TableColumn<LabSession, String> tableColumn_groups_day;
     @FXML
     private TableColumn<LabSession, String> tableColumn_groups_time;
     @FXML
     private TableColumn<LabSession, String> tableColumn_groups_groupName;
+    @FXML
+    private TextField tf_groupName;
     @FXML
     private ComboBox<String> combo_day;
     @FXML
@@ -43,9 +43,35 @@ public class GroupsController {
     private Label label_groupsEditorHeading;
 
     private Module module;
+
     private ObservableList<LabSession> sessions = FXCollections.observableArrayList();
 
+
     //FXML methods
+
+    @FXML
+    void comboGroupsDayKeyPressed(KeyEvent event) {
+
+        if(event.getCode() == KeyCode.ENTER) {
+            combo_day.show();
+        }
+    }
+
+    @FXML
+    public void tableGroupsMouseClicked(MouseEvent event) {
+        setGroupEditor();
+    }
+
+    @FXML
+    public void tableGroupsKeyPressed(KeyEvent event) {
+
+        if(event.getCode() == KeyCode.DELETE) {
+            deleteSelectedGroup();
+        }
+        if(event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.UP) {
+            setGroupEditor();
+        }
+    }
 
     @FXML
     public void deleteButtonAction(ActionEvent actionEvent) {
@@ -75,39 +101,7 @@ public class GroupsController {
     public void saveGroupEdit(ActionEvent actionEvent) {
     }
 
-    @FXML
-    void comboGroupsDayKeyPressed(KeyEvent event) {
-
-        if(event.getCode() == KeyCode.ENTER) {
-            combo_day.show();
-        }
-    }
-
-    @FXML
-    public void tableGroupsMouseClicked(MouseEvent mouseEvent) {
-        setGroupEditor();
-    }
-
-    @FXML
-    public void tableGroupsKeyPressed(KeyEvent keyEvent) {
-
-        if(keyEvent.getCode() == KeyCode.DELETE) {
-            deleteSelectedGroup();
-        }
-        if(keyEvent.getCode() == KeyCode.DOWN || keyEvent.getCode() == KeyCode.UP) {
-            setGroupEditor();
-        }
-    }
-
     // Helper methods
-
-    public void setModule(Module module) {
-        this.module = module;
-    }
-
-    public Module getModule() {
-        return module;
-    }
 
     public void setData(Module m) {
 
@@ -138,6 +132,14 @@ public class GroupsController {
             tf_startTime.setText(s.getStartTime().toString());
         }
 
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
+    }
+
+    public Module getModule() {
+        return module;
     }
 
     public int getSessionIndex(String groupName) {
