@@ -14,7 +14,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(root);
 
-        stage.setTitle("LabManager for MULE");
+        stage.setTitle("LabManager");
         stage.setScene(scene);
         stage.getIcons().add(new Image("/media/icon.png"));
         stage.show();

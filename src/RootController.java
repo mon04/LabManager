@@ -212,6 +212,7 @@ public class RootController implements Initializable {
             date_problemsDisappear.setValue(selectedModule.getProblemsDisappear().toLocalDate());
             tf_problemsDisappearTime.setText(selectedModule.getProblemsDisappear().toLocalTime().toString());
         }
+
     }
 
     public void setCellFactory(ListView<Module> listView) {

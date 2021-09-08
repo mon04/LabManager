@@ -37,8 +37,8 @@ public class LabSession {
 		this.length = length;
 	}
 
-	public void setLength(Long hours, Long mins) {
-		length = (hours*60 +mins);
+	public void setLength(Long hours, Long min) {
+		length = (hours*60 +min);
 	}
 
 	public DayOfWeek getDay() {

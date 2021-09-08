@@ -194,9 +194,14 @@ public class GroupsController {
     }
 
     public void setLabLengths() {
+
+        long hourComponent = Long.parseLong(tf_labLengthHours.getText());
+        long minComponent = Long.parseLong(tf_labLengthMin.getText());
+
         for(LabSession s : sessions) {
-            s.setLength(Long.parseLong(tf_labLengthHours.getText()), Long.parseLong(tf_labLengthMin.getText()));
+            s.setLength(hourComponent, minComponent);
         }
+
     }
 
     public void closeStage() {
