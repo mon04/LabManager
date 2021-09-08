@@ -43,6 +43,8 @@ public class GroupsController {
     @FXML
     private Label label_groupsEditorHeading;
 
+    private RootController rootController;
+
     private Module module;
 
     private ObservableList<LabSession> sessions = FXCollections.observableArrayList();
@@ -97,6 +99,7 @@ public class GroupsController {
     @FXML
     public void cancelGroupEdit(ActionEvent actionEvent) {
         closeStage();
+        rootController.setDisable(false);
     }
 
     @FXML
@@ -106,13 +109,15 @@ public class GroupsController {
         module.getLabSessions().setAll(sessions);
 
         closeStage();
+        rootController.setDisable(false);
     }
 
     // Helper methods
 
-    public void setData(Module m) {
+    public void setData(Module m, RootController r) {
 
         setModule(m);
+        setRootController(r);
 
         combo_day.setItems(RootController.daysFormatted);
 
@@ -149,6 +154,16 @@ public class GroupsController {
 
     public Module getModule() {
         return module;
+    }
+
+    public void setRootController(RootController rootController) {
+
+        this.rootController = rootController;
+    }
+
+    public RootController getRootController() {
+
+        return rootController;
     }
 
     public int getSessionIndex(String groupName) {

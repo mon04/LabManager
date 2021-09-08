@@ -116,13 +116,13 @@ public class RootController implements Initializable {
     @FXML
     void openGroupsEditor(ActionEvent event) throws IOException {
 
-        //vbox_entireScene.setDisable(true);
+        vbox_entireScene.setDisable(true);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Groups.fxml"));
         Parent root = loader.load();
         GroupsController groupsController = loader.getController();
 
-        groupsController.setData(getSelectedModule());
+        groupsController.setData(getSelectedModule(), this);
         System.out.println("Opening session editor: "+groupsController.getModule().getCode());
 
         Stage stage = new Stage();
@@ -304,6 +304,11 @@ public class RootController implements Initializable {
                 new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
                 LocalDateTime.of(date_problemsDisappear.getValue(), LocalTime.parse(tf_problemsDisappearTime.getText()))
         );
+    }
+
+    public void setDisable(boolean disable) {
+
+        vbox_entireScene.setDisable(disable);
     }
 
     // Testing
