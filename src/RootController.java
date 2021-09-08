@@ -25,6 +25,7 @@ import java.util.*;
 
 public class RootController implements Initializable {
 
+    public VBox vbox_entireScene;
     @FXML
     private ListView<String> list_savedModules;
     @FXML
@@ -69,9 +70,6 @@ public class RootController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) {
 
-        label_moduleEditorHeading.setText("Select a module to edit");
-        vbox_newModule.setDisable(true);
-
         //Set items for 'day of week' combo boxes
         for(DayOfWeek d : DayOfWeek.values()) {
             daysFormatted.add(d.getDisplayName(TextStyle.FULL, Locale.ENGLISH));
@@ -82,6 +80,7 @@ public class RootController implements Initializable {
         //Default "New" module
         moduleObjects.add(new Module("New"));
         updateModuleList();
+        selectModule(0);
 
         //Add some test modules
         addTestModules(moduleObjects);
@@ -99,6 +98,8 @@ public class RootController implements Initializable {
 
     @FXML
     void openGroupsEditor(ActionEvent event) throws IOException {
+
+        vbox_entireScene.setDisable(true);
         System.out.println("Opening Groups window...");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Groups.fxml"));
@@ -213,6 +214,12 @@ public class RootController implements Initializable {
             }
         }
         return -1;
+    }
+
+    public void selectModule(int i) {
+
+        list_savedModules.getSelectionModel().select(i);
+        setModuleEditor();
     }
 
     public void updateModuleList() {
