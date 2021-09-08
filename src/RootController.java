@@ -7,12 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +29,7 @@ public class RootController implements Initializable {
 
     public VBox vbox_entireScene;
     @FXML
-    private ListView<String> list_savedModules;
+    private ListView<Module> list_savedModules;
     @FXML
     private VBox vbox_newModule;
     @FXML
@@ -37,13 +39,11 @@ public class RootController implements Initializable {
     @FXML
     private TextField tf_moduleTitle;
     @FXML
-    private TableView table_groups;
-    //private ListView<String> list_moduleWeeks;
+    private TableView<LabSession> table_groups;
     @FXML
     private Button btn_moduleWeeksEdit;
     @FXML
-    private TableView table_weeks;
-    //private ListView<String> list_moduleGroups;
+    private TableView<Week> table_weeks;
     @FXML
     private Button btn_moduleGroupsEdit;
     @FXML
@@ -63,12 +63,15 @@ public class RootController implements Initializable {
     @FXML
     private Button btn_deleteModule;
 
-    private ArrayList<Module> moduleObjects = new ArrayList<Module>();
-    ObservableList<String> moduleFullTitles = FXCollections.observableArrayList();
-
     public static ObservableList<String> daysFormatted = FXCollections.observableArrayList();
 
+    private ObservableList<Module> modules = FXCollections.observableArrayList();
+
+
     public void initialize(URL url, ResourceBundle rb) {
+
+        list_savedModules.setItems(modules);
+        setCellFactory(list_savedModules);
 
         //Set items for 'day of week' combo boxes
         for(DayOfWeek d : DayOfWeek.values()) {
@@ -78,12 +81,28 @@ public class RootController implements Initializable {
         combo_caEvaluationEndsDay.setItems(daysFormatted);
 
         //Default "New" module
-        moduleObjects.add(new Module("New"));
-        updateModuleList();
+        modules.add(new Module("New"));
         selectModule(0);
 
         //Add some test modules
-        addTestModules(moduleObjects);
+        addTestModules(modules);
+    }
+
+    public void setCellFactory(ListView<Module> listView) {
+
+        listView.setCellFactory(param -> new ListCell<Module>() {
+            @Override
+            protected void updateItem(Module item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.getFullTitle() == null) {
+                    setText(null);
+                } else {
+                    setText(item.getFullTitle());
+                }
+            }
+        });
+
     }
 
     @FXML
@@ -119,7 +138,7 @@ public class RootController implements Initializable {
     public Module getSelectedModule() {
         int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
         if(selectedIndex > -1) {
-            return moduleObjects.get(selectedIndex);
+            return modules.get(selectedIndex);
         }
         return null;
     }
@@ -148,10 +167,9 @@ public class RootController implements Initializable {
 
         int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
         if(selectedIndex > 0) {
-
-            moduleObjects.remove(selectedIndex);
-            updateModuleList();
+            modules.remove(selectedIndex);
         }
+
     }
 
     @FXML
@@ -160,18 +178,18 @@ public class RootController implements Initializable {
         int selectedIndex = list_savedModules.getSelectionModel().getSelectedIndex();
         if(selectedIndex > -1) {
 
-            if(moduleExists(tf_moduleCode.getText())) {
-                int existingIndex = getModuleIndex(tf_moduleCode.getText());
-                moduleObjects.remove(existingIndex);
-                moduleObjects.add(existingIndex, newModuleFromData());
+            int existingIndex;
+            if((existingIndex = getModuleIndex(tf_moduleCode.getText())) > -1) {
+                modules.remove(existingIndex);
+                modules.add(existingIndex, newModuleFromData());
             }
             else {
-                moduleObjects.add(newModuleFromData());
+                modules.add(newModuleFromData());
             }
 
-            label_moduleEditorHeading.setText(moduleObjects.get(selectedIndex).getFullTitle());
+            label_moduleEditorHeading.setText(modules.get(selectedIndex).getFullTitle());
         }
-        updateModuleList();
+
     }
 
     public void setModuleEditor() {
@@ -181,7 +199,7 @@ public class RootController implements Initializable {
 
             vbox_newModule.setDisable(false);
 
-            Module selectedModule = moduleObjects.get(selectedIndex);
+            Module selectedModule = modules.get(selectedIndex);
 
             //Disable 'Delete module' btn for "New"
             if(selectedIndex == 0) btn_deleteModule.setDisable(true);
@@ -205,15 +223,16 @@ public class RootController implements Initializable {
 
     public int getModuleIndex(String code) {
 
-        for(int i = 0; i < moduleObjects.size(); i++) {
+        for(int i = 0; i < modules.size(); i++) {
 
-            Module m = moduleObjects.get(i);
+            Module m = modules.get(i);
 
             if(m.getCode().equalsIgnoreCase(code)) {
                 return i;
             }
         }
         return -1;
+
     }
 
     public void selectModule(int i) {
@@ -222,32 +241,21 @@ public class RootController implements Initializable {
         setModuleEditor();
     }
 
-    public void updateModuleList() {
-
-        moduleFullTitles = FXCollections.observableArrayList();
-
-        sortModules();
-        for(Module m : moduleObjects) {
-            moduleFullTitles.add(m.getFullTitle());
-        }
-
-        list_savedModules.setItems(moduleFullTitles);
-    }
 
     public void sortModules() {
 
         //Bubble sort
-        for(int i = 0; i < moduleObjects.size(); i++) {
-            for (int j = 1; j < (moduleObjects.size() -i); j++) {
+        for(int i = 0; i < modules.size(); i++) {
+            for (int j = 1; j < (modules.size() -i); j++) {
 
-                Module m1 = moduleObjects.get(j-1);
-                Module m2 = moduleObjects.get(j);
+                Module m1 = modules.get(j-1);
+                Module m2 = modules.get(j);
 
                 //Keep "New" at index 0
                 if(!m1.getCode().equals("New") && !m2.getCode().equals("New")) {
 
                     if (m1.getCode().compareToIgnoreCase(m2.getCode()) > 0) {
-                        Collections.swap(moduleObjects, j, j-1);
+                        Collections.swap(modules, j, j-1);
                     }
                 }
             }
@@ -257,8 +265,8 @@ public class RootController implements Initializable {
 
     public boolean moduleExists(String code) {
 
-        for(Module m : moduleObjects) {
-            if(m.getCode().equals(code)) {
+        for(Module m : modules) {
+            if(m.getCode().equalsIgnoreCase(code)) {
                 return true;
             }
         }
@@ -283,7 +291,7 @@ public class RootController implements Initializable {
 
 
     // Testing
-    public void addTestModules(ArrayList<Module> destination) {
+    public void addTestModules(ObservableList<Module> destination) {
 
         ArrayList<LabSession> sessions = new ArrayList<>();
 
@@ -320,8 +328,6 @@ public class RootController implements Initializable {
                 new DayOfWeekAndTime(DayOfWeek.SUNDAY, LocalTime.of(15,0)),
                 LocalDateTime.of(2022,8,31,23,59)
         ));
-
-        updateModuleList();
 
     }
 

@@ -47,14 +47,13 @@ public class GroupsController {
         int existingIndex;
         if((existingIndex = getSessionIndex(tf_groupName.getText())) != -1) {
             System.out.println("Overwriting: "+tf_groupName.getText());
-            //System.out.println("  Removing: "+sessions.get(existingIndex).getGroupName());
             sessions.remove(existingIndex);
             sessions.add(existingIndex, newSessionFromData());
         }
         else {
             sessions.add(newSessionFromData());
         }
-        //updateGroupsTable();
+
     }
 
     @FXML
@@ -122,9 +121,11 @@ public class GroupsController {
             combo_day.setValue(s.getDayFormatted());
             tf_startTime.setText(s.getStartTime().toString());
         }
+
     }
 
     public int getSessionIndex(String groupName) {
+
         for(int i = 0; i < sessions.size(); i++) {
             LabSession s = sessions.get(i);
             if(s.getGroupName().equalsIgnoreCase(groupName)) {
@@ -132,6 +133,7 @@ public class GroupsController {
             }
         }
         return -1;
+
     }
 
     public LabSession newSessionFromData() {
@@ -147,7 +149,6 @@ public class GroupsController {
 
     public void deleteSelectedGroup() {
         sessions.remove(table_groups.getSelectionModel().getSelectedIndex());
-        //updateGroupsTable();
     }
 
 
