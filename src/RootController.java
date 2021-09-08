@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -41,6 +42,12 @@ public class RootController implements Initializable {
     @FXML
     private TableView<LabSession> table_groups;
     @FXML
+    private TableColumn<LabSession, String> tableColumn_groups_day;
+    @FXML
+    private TableColumn<LabSession, String> tableColumn_groups_time;
+    @FXML
+    private TableColumn<LabSession, String> tableColumn_groups_groupName;
+    @FXML
     private Button btn_moduleWeeksEdit;
     @FXML
     private TableView<Week> table_weeks;
@@ -74,6 +81,10 @@ public class RootController implements Initializable {
         list_savedModules.setItems(modules);
         setCellFactory(list_savedModules);
 
+        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("dayFormatted"));
+        tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
+
         //Set items for 'day of week' combo boxes
         for(DayOfWeek d : DayOfWeek.values()) {
             daysFormatted.add(d.getDisplayName(TextStyle.FULL, Locale.ENGLISH));
@@ -104,7 +115,7 @@ public class RootController implements Initializable {
     @FXML
     void openGroupsEditor(ActionEvent event) throws IOException {
 
-        vbox_entireScene.setDisable(true);
+        //vbox_entireScene.setDisable(true);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Groups.fxml"));
         Parent root = loader.load();
@@ -188,6 +199,8 @@ public class RootController implements Initializable {
 
             tf_moduleCode.setText(selectedModule.getCode());
             tf_moduleTitle.setText(selectedModule.getTitle());
+
+            table_groups.setItems(selectedModule.getLabSessions());
 
             combo_problemsReleasedDay.setValue(selectedModule.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
             tf_problemsReleasedTime.setText(selectedModule.getProblemsReleased().getTime().toString());
@@ -283,7 +296,7 @@ public class RootController implements Initializable {
         return new Module(
                 tf_moduleTitle.getText(),
                 tf_moduleCode.getText(),
-                new ArrayList<LabSession>(),
+                FXCollections.observableArrayList(),
                 new ArrayList<Week>(),
                 new DayOfWeekAndTime(problemsReleasedDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
                 new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
@@ -295,7 +308,7 @@ public class RootController implements Initializable {
 
     public void addTestModules(ObservableList<Module> destination) {
 
-        ArrayList<LabSession> sessions = new ArrayList<>();
+        ObservableList<LabSession> sessions = FXCollections.observableArrayList();
 
         sessions.add(
                 new LabSession("Red", 0, DayOfWeek.THURSDAY, LocalTime.of(9,0))
@@ -324,7 +337,7 @@ public class RootController implements Initializable {
         destination.add(new Module(
                 "Computer Systems 1",
                 "CS171",
-                new ArrayList<LabSession>(),
+                FXCollections.observableArrayList(),
                 new ArrayList<Week>(),
                 new DayOfWeekAndTime(DayOfWeek.TUESDAY, LocalTime.of(12,0)),
                 new DayOfWeekAndTime(DayOfWeek.SUNDAY, LocalTime.of(15,0)),

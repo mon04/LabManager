@@ -1,3 +1,6 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,13 +10,13 @@ public class Module {
 	
 	private String title;
 	private String code;
-	private ArrayList<LabSession> labSessions;
+	private ObservableList<LabSession> labSessions;
 	private ArrayList<Week> weeks;
 	private DayOfWeekAndTime problemsReleased;
 	private DayOfWeekAndTime caEvaluationEnds;
 	private LocalDateTime problemsDisappear;
 
-	public Module(String title, String code, ArrayList<LabSession> labSessions, ArrayList<Week> weeks, DayOfWeekAndTime problemsReleased, DayOfWeekAndTime caEvaluationEnds, LocalDateTime problemsDisappear) {
+	public Module(String title, String code, ObservableList<LabSession> labSessions, ArrayList<Week> weeks, DayOfWeekAndTime problemsReleased, DayOfWeekAndTime caEvaluationEnds, LocalDateTime problemsDisappear) {
 		this.title = title;
 		this.code = code;
 		this.labSessions = labSessions;
@@ -31,13 +34,13 @@ public class Module {
 
 	public Module() {
 		this(
-			"",
-			"DEFAULT_CODE",
-			new ArrayList<LabSession>(),
-			new ArrayList<Week>(),
-			new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9, 0)),
-			new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0)),
-			LocalDateTime.of(2021, 8, 31, 23, 59)
+				"",
+				"DEFAULT_CODE",
+				FXCollections.observableArrayList(),
+				new ArrayList<Week>(),
+				new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9, 0)),
+				new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0)),
+				LocalDateTime.of(2021, 8, 31, 23, 59)
 		);
 	}
 
@@ -76,11 +79,11 @@ public class Module {
 		this.weeks = weeks;
 	}
 
-	public ArrayList<LabSession> getLabSessions() {
+	public ObservableList<LabSession> getLabSessions() {
 		return labSessions;
 	}
 
-	public void setLabSessions(ArrayList<LabSession> labSessions) {
+	public void setLabSessions(ObservableList<LabSession> labSessions) {
 		this.labSessions = labSessions;
 	}
 
