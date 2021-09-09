@@ -298,7 +298,7 @@ public class RootController implements Initializable {
         return new Module(
                 tf_moduleTitle.getText(),
                 tf_moduleCode.getText(),
-                FXCollections.observableArrayList(),
+                table_groups.getItems(),
                 new ArrayList<Week>(),
                 new DayOfWeekAndTime(problemsReleasedDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
                 new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
