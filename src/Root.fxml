@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="825.0" prefWidth="427.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RootController">
+<AnchorPane prefHeight="850.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RootController">
    <children>
       <VBox fx:id="vbox_entireScene" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -33,7 +33,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="list_savedModules" onKeyPressed="#moduleListKeyPressed" onMouseClicked="#moduleListClicked" prefHeight="153.0" prefWidth="412.0" />
+                  <ListView fx:id="list_savedModules" onKeyPressed="#moduleListKeyPressed" onMouseClicked="#moduleListClicked" prefHeight="120.0" prefWidth="412.0" />
                   <Separator prefWidth="200.0">
                      <opaqueInsets>
                         <Insets />
@@ -75,8 +75,8 @@
                               </VBox>
                               <TableView fx:id="table_weeks" focusTraversable="false" prefHeight="160.0" prefWidth="308.0" stylesheets="@RemoveHBarsFromTableViews.css" HBox.hgrow="ALWAYS">
                                  <columns>
-                                    <TableColumn prefWidth="106.0" text="Beginning" />
-                                    <TableColumn prefWidth="235.0" text="Problem sets" />
+                                    <TableColumn minWidth="20.0" prefWidth="106.0" text="Beginning" />
+                                    <TableColumn minWidth="20.0" prefWidth="235.0" text="Problem sets" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -84,7 +84,7 @@
                               </TableView>
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="68.0" prefHeight="160.0" prefWidth="200.0" spacing="4.0">
+                        <HBox layoutX="10.0" layoutY="68.0" prefHeight="160.0" prefWidth="200.0" spacing="4.0" VBox.vgrow="ALWAYS">
                            <children>
                               <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="2000.0" prefWidth="64.0" spacing="4.0">
                                  <children>
@@ -94,9 +94,9 @@
                               </VBox>
                               <TableView fx:id="table_groups" focusTraversable="false" stylesheets="@RemoveHBarsFromTableViews.css" HBox.hgrow="ALWAYS">
                                 <columns>
-                                  <TableColumn fx:id="tableColumn_groups_day" minWidth="-1.0" prefWidth="-1.0" text="Day" />
-                                  <TableColumn fx:id="tableColumn_groups_time" minWidth="-1.0" prefWidth="-1.0" text="Time" />
-                                    <TableColumn fx:id="tableColumn_groups_groupName" minWidth="-1.0" prefWidth="-1.0" text="Group name" />
+                                  <TableColumn fx:id="tableColumn_groups_day" minWidth="20.0" prefWidth="-1.0" text="Day" />
+                                  <TableColumn fx:id="tableColumn_groups_time" minWidth="20.0" prefWidth="-1.0" text="Time" />
+                                    <TableColumn fx:id="tableColumn_groups_groupName" minWidth="20.0" prefWidth="-1.0" text="Group name" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
