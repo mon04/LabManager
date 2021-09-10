@@ -75,6 +75,7 @@ public class RootController implements Initializable {
 
     private ObservableList<Module> modules = FXCollections.observableArrayList();
 
+
     // Initialize method
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -99,6 +100,7 @@ public class RootController implements Initializable {
 
         //Add some test modules
         addTestModules(modules);
+
     }
 
     // FXML methods
