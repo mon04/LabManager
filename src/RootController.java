@@ -136,6 +136,8 @@ public class RootController implements Initializable {
         stage.setTitle("LabManager - Groups");
         stage.setScene(new Scene(root));
         stage.getIcons().add(new Image("/media/icon.png"));
+        stage.setMinWidth(400);
+        stage.setMinHeight(485);
         stage.showAndWait();
     }
 
