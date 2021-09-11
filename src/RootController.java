@@ -12,13 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +21,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.*;
 
@@ -324,7 +320,7 @@ public class RootController implements Initializable {
                 new ArrayList<Week>(),
                 new DayOfWeekAndTime(problemsReleasedDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
                 new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
-                LocalDateTime.of(date_problemsDisappear.getValue(), LocalTime.parse(tf_problemsDisappearTime.getText()))
+                LocalDateTime.of(LocalDate.parse(date_problemsDisappear.getEditor().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), LocalTime.parse(tf_problemsDisappearTime.getText()))
         );
     }
 
