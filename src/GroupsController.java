@@ -17,7 +17,7 @@ public class GroupsController {
     @FXML
     private TableView<LabSession> table_groups;
     @FXML
-    private TableColumn<LabSession, String> tableColumn_groups_day;
+    private TableColumn<LabSession, DayOfWeek> tableColumn_groups_day;
     @FXML
     private TableColumn<LabSession, String> tableColumn_groups_time;
     @FXML
@@ -120,13 +120,13 @@ public class GroupsController {
         setModule(m);
         setRootController(r);
 
-        combo_day.setItems(RootController.daysFormatted);
+        combo_day.setItems(RootController.daysFormatted());
 
         label_groupsEditorHeading.setText(m.getFullTitle());
 
         sessions.addAll(module.getLabSessions());
 
-        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("dayFormatted"));
+        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("day"));
         tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
         table_groups.setItems(sessions);

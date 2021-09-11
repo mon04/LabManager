@@ -56,7 +56,7 @@ public class RootController implements Initializable {
     @FXML
     private TableView<LabSession> table_groups;
     @FXML
-    private TableColumn<LabSession, String> tableColumn_groups_day;
+    private TableColumn<LabSession, DayOfWeek> tableColumn_groups_day;
     @FXML
     private TableColumn<LabSession, String> tableColumn_groups_time;
     @FXML
@@ -72,7 +72,6 @@ public class RootController implements Initializable {
     @FXML
     private Button btn_deleteModule;
 
-    public static ObservableList<String> daysFormatted = FXCollections.observableArrayList();
 
     private ObservableList<Module> modules = FXCollections.observableArrayList();
 
@@ -84,16 +83,13 @@ public class RootController implements Initializable {
         list_savedModules.setItems(modules);
         setCellFactory(list_savedModules);
 
-        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("dayFormatted"));
+        tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("day"));
         tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         tableColumn_groups_groupName.setCellValueFactory(new PropertyValueFactory<>("groupName"));
 
         //Set items for 'day of week' combo boxes
-        for(DayOfWeek d : DayOfWeek.values()) {
-            daysFormatted.add(d.getDisplayName(TextStyle.FULL, Locale.ENGLISH));
-        }
-        combo_problemsReleasedDay.setItems(daysFormatted);
-        combo_caEvaluationEndsDay.setItems(daysFormatted);
+        combo_problemsReleasedDay.setItems(daysFormatted());
+        combo_caEvaluationEndsDay.setItems(daysFormatted());
 
         //Default "New" module
         modules.add(new Module("New"));
@@ -327,6 +323,17 @@ public class RootController implements Initializable {
     public void setDisable(boolean disable) {
 
         vbox_entireScene.setDisable(disable);
+    }
+
+    public static ObservableList<String> daysFormatted() {
+
+        ObservableList<String> out = FXCollections.observableArrayList();
+
+        for(DayOfWeek d : DayOfWeek.values()) {
+            out.add(d.getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+        }
+
+        return out;
     }
 
     // Testing
