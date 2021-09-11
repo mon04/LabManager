@@ -186,13 +186,13 @@
                         <Insets top="8.0" />
                      </VBox.margin>
                   </VBox>
-                  <HBox alignment="BOTTOM_RIGHT" prefWidth="200.0" spacing="8.0">
+                  <HBox alignment="BOTTOM_RIGHT" minHeight="-Infinity" prefWidth="200.0" spacing="8.0">
                      <children>
                         <Button fx:id="btn_deleteModule" mnemonicParsing="false" onAction="#deleteModule" prefWidth="95.0" text="Delete module" />
                         <Button fx:id="btn_saveModule" mnemonicParsing="false" onAction="#saveModule" prefWidth="95.0" text="Save module" />
                      </children>
                      <padding>
-                        <Insets top="16.0" />
+                        <Insets top="8.0" />
                      </padding>
                   </HBox>
                </children>
