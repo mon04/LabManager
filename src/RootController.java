@@ -183,7 +183,7 @@ public class RootController implements Initializable {
                 modules.add(newModuleFromData());
             }
 
-            label_moduleEditorHeading.setText(modules.get(selectedIndex).getFullTitle());
+            selectModule(tf_moduleCode.getText());
         }
 
     }
@@ -243,6 +243,17 @@ public class RootController implements Initializable {
 
         list_savedModules.getSelectionModel().select(i);
         setModuleEditor();
+    }
+
+    public void selectModule(String code) {
+
+        for(int i = 0; i < modules.size(); i++) {
+
+            if(modules.get(i).getCode().equalsIgnoreCase(code)) {
+                selectModule(i);
+            }
+        }
+
     }
 
     public int getModuleIndex(String code) {
