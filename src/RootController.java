@@ -130,15 +130,17 @@ public class RootController implements Initializable {
         GroupsController groupsController = loader.getController();
 
         groupsController.setData(getSelectedModule(), this);
-        System.out.println("Opening session editor: "+groupsController.getModule().getCode());
+
+        String moduleCode = groupsController.getModule().getCode();
 
         Stage stage = new Stage();
-        stage.setTitle("LabManager - Groups");
+        stage.setTitle(String.format("%s - Timed labs", moduleCode));
         stage.setScene(new Scene(root));
         stage.getIcons().add(new Image("/media/icon.png"));
         stage.setMinWidth(400);
         stage.setMinHeight(485);
         stage.showAndWait();
+
     }
 
     @FXML
