@@ -1,3 +1,5 @@
+import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -5,9 +7,9 @@ import java.util.ArrayList;
 public class Week {
 	
 	private LocalDate weekBegins;
-	private ArrayList<Problem> problemSet;
+	private ObservableList<Problem> problemSet;
 
-	public Week(LocalDate weekBegins, ArrayList<Problem> problemSet) {
+	public Week(LocalDate weekBegins, ObservableList<Problem> problemSet) {
 		this.weekBegins = weekBegins;
 		this.problemSet = problemSet;
 	}
@@ -20,11 +22,11 @@ public class Week {
 		this.weekBegins = weekBegins;
 	}
 
-	public ArrayList<Problem> getProblemSet() {
+	public ObservableList<Problem> getProblemSet() {
 		return problemSet;
 	}
 
-	public void setProblemSet(ArrayList<Problem> problemSet) {
+	public void setProblemSet(ObservableList<Problem> problemSet) {
 		this.problemSet = problemSet;
 	}
 }

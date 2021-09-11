@@ -1,12 +1,14 @@
+import javafx.collections.ObservableList;
+
 public class Problem {
 
 	private String title;
 	private String set;
 	private boolean hidden;
-	private String[] files;
+	private ObservableList<String> files;
 	private ProblemDescription description;
 
-	public Problem(String title, String set, boolean hidden, String[] files, ProblemDescription description) {
+	public Problem(String title, String set, boolean hidden, ObservableList<String> files, ProblemDescription description) {
 		this.title = title;
 		this.set = set;
 		this.hidden = hidden;
@@ -38,11 +40,11 @@ public class Problem {
 		this.hidden = hidden;
 	}
 
-	public String[] getFiles() {
+	public ObservableList<String> getFiles() {
 		return files;
 	}
 
-	public void setFiles(String[] files) {
+	public void setFiles(ObservableList<String> files) {
 		this.files = files;
 	}
 
