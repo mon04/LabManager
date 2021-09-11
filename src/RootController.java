@@ -13,7 +13,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -41,6 +44,20 @@ public class RootController implements Initializable {
     @FXML
     private TextField tf_moduleTitle;
     @FXML
+    private ComboBox<String> combo_problemsReleasedDay;
+    @FXML
+    private TextField tf_problemsReleasedTime;
+    @FXML
+    private ComboBox<String> combo_caEvaluationEndsDay;
+    @FXML
+    private TextField tf_caEvaluationEndsTime;
+    @FXML
+    private DatePicker date_problemsDisappear;
+    @FXML
+    private TextField tf_problemsDisappearTime;
+    @FXML
+    private SplitPane splitPane_weeksTimedLabs;
+    @FXML
     private TableView<LabSession> table_groups;
     @FXML
     private TableColumn<LabSession, String> tableColumn_groups_day;
@@ -54,18 +71,6 @@ public class RootController implements Initializable {
     private TableView<Week> table_weeks;
     @FXML
     private Button btn_moduleGroupsEdit;
-    @FXML
-    private ComboBox<String> combo_problemsReleasedDay;
-    @FXML
-    private TextField tf_problemsReleasedTime;
-    @FXML
-    private ComboBox<String> combo_caEvaluationEndsDay;
-    @FXML
-    private TextField tf_caEvaluationEndsTime;
-    @FXML
-    private DatePicker date_problemsDisappear;
-    @FXML
-    private TextField tf_problemsDisappearTime;
     @FXML
     private Button btn_saveModule;
     @FXML

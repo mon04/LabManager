@@ -84,7 +84,7 @@ public class Module {
 	}
 
 	public void setLabSessions(ObservableList<LabSession> labSessions) {
-		this.labSessions = labSessions;
+		this.labSessions = FXCollections.observableArrayList(labSessions);
 	}
 
 	public DayOfWeekAndTime getProblemsReleased() {

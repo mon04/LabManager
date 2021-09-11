@@ -106,9 +106,10 @@ public class GroupsController {
     public void saveGroupEdit(ActionEvent actionEvent) {
 
         setLabLengths();
-        module.getLabSessions().setAll(sessions);
+        module.setLabSessions(FXCollections.observableArrayList(sessions));
 
         closeStage();
+        rootController.setModuleEditor();
         rootController.setDisable(false);
     }
 
