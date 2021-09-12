@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public class Week {
 	
 	private LocalDate weekBegins;
-	private ObservableList<Problem> problemSet;
+	private ProblemSet problemSet;
 
-	public Week(LocalDate weekBegins, ObservableList<Problem> problemSet) {
+	public Week(LocalDate weekBegins, ProblemSet problemSet) {
 		this.weekBegins = weekBegins;
 		this.problemSet = problemSet;
 	}
@@ -22,11 +22,13 @@ public class Week {
 		this.weekBegins = weekBegins;
 	}
 
-	public ObservableList<Problem> getProblemSet() {
+	public ProblemSet getProblemSet() {
 		return problemSet;
 	}
 
-	public void setProblemSet(ObservableList<Problem> problemSet) {
+	public void setProblemSet(ProblemSet problemSet) {
+
 		this.problemSet = problemSet;
 	}
+
 }

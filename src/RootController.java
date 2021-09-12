@@ -136,9 +136,28 @@ public class RootController implements Initializable {
     }
 
     @FXML
-    void openWeeksEditor(ActionEvent event) {
+    void openWeeksEditor(ActionEvent event) throws IOException {
+
+        vbox_entireScene.setDisable(true);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Weeks.fxml"));
+        Parent root = loader.load();
+        WeeksController weeksController = loader.getController();
+
+        weeksController.setData(getSelectedModule(), this);
+
+        String moduleCode = weeksController.getModule().getCode();
+
+        Stage stage = new Stage();
+        stage.setTitle(String.format("%s - Weeks", moduleCode));
+        stage.setScene(new Scene(root));
+        stage.getIcons().add(new Image("/media/icon.png"));
+        stage.setMinWidth(400);
+        stage.setMinHeight(350);
+        stage.showAndWait();
 
     }
+
 
     @FXML
     void comboProblemsReleasedDayKeyPressed(KeyEvent event) {
@@ -313,7 +332,7 @@ public class RootController implements Initializable {
                 tf_moduleTitle.getText(),
                 tf_moduleCode.getText(),
                 table_groups.getItems(),
-                new ArrayList<Week>(),
+                FXCollections.observableArrayList(),
                 new DayOfWeekAndTime(problemsReleasedDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
                 new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
                 LocalDateTime.of(LocalDate.parse(date_problemsDisappear.getEditor().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), LocalTime.parse(tf_problemsDisappearTime.getText()))
@@ -340,8 +359,29 @@ public class RootController implements Initializable {
 
     public void addTestModules(ObservableList<Module> destination) {
 
-        ObservableList<LabSession> sessions = FXCollections.observableArrayList();
+        ProblemSet problemSet1 = new ProblemSet();
+        problemSet1.add(
+                new Problem("Hello World", "Lab", false, "HelloWorld.java", new ProblemDescription())
+        );
+        problemSet1.add(
+                new Problem("Sum Two Numbers", "Lab", true, "SumTwoNum.java", new ProblemDescription())
+        );
+        problemSet1.add(
+                new Problem("Palindrome", "Tutorial", false, "Palindrome.java", new ProblemDescription())
+        );
+        problemSet1.add(
+                new Problem("Bubble Sort", "Tutorial", false, "BubbleSort.java", new ProblemDescription())
+        );
 
+        ObservableList<Week> weeks = FXCollections.observableArrayList();
+        weeks.add(
+                new Week(LocalDate.of(2021, 9, 20), problemSet1)
+        );
+        weeks.add(
+                new Week(LocalDate.of(2021, 9, 27), new ProblemSet())
+        );
+
+        ObservableList<LabSession> sessions = FXCollections.observableArrayList();
         sessions.add(
                 new LabSession("Red", 90, DayOfWeek.THURSDAY, LocalTime.of(9,0))
         );
@@ -360,7 +400,7 @@ public class RootController implements Initializable {
                 "Introduction to Programming 1",
                 "CS161",
                 sessions,
-                new ArrayList<Week>(),
+                weeks,
                 new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9,30)),
                 new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(18,0)),
                 LocalDateTime.of(2022,8,31,23,59)
@@ -370,7 +410,7 @@ public class RootController implements Initializable {
                 "Computer Systems 1",
                 "CS171",
                 FXCollections.observableArrayList(),
-                new ArrayList<Week>(),
+                FXCollections.observableArrayList(),
                 new DayOfWeekAndTime(DayOfWeek.TUESDAY, LocalTime.of(12,0)),
                 new DayOfWeekAndTime(DayOfWeek.SUNDAY, LocalTime.of(15,0)),
                 LocalDateTime.of(2022,8,31,23,59)

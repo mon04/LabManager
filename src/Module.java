@@ -11,12 +11,12 @@ public class Module {
 	private String title;
 	private String code;
 	private ObservableList<LabSession> labSessions;
-	private ArrayList<Week> weeks;
+	private ObservableList<Week> weeks;
 	private DayOfWeekAndTime problemsReleased;
 	private DayOfWeekAndTime caEvaluationEnds;
 	private LocalDateTime problemsDisappear;
 
-	public Module(String title, String code, ObservableList<LabSession> labSessions, ArrayList<Week> weeks, DayOfWeekAndTime problemsReleased, DayOfWeekAndTime caEvaluationEnds, LocalDateTime problemsDisappear) {
+	public Module(String title, String code, ObservableList<LabSession> labSessions, ObservableList<Week> weeks, DayOfWeekAndTime problemsReleased, DayOfWeekAndTime caEvaluationEnds, LocalDateTime problemsDisappear) {
 		this.title = title;
 		this.code = code;
 		this.labSessions = labSessions;
@@ -37,7 +37,7 @@ public class Module {
 				"",
 				"DEFAULT_CODE",
 				FXCollections.observableArrayList(),
-				new ArrayList<Week>(),
+				FXCollections.observableArrayList(),
 				new DayOfWeekAndTime(DayOfWeek.MONDAY, LocalTime.of(9, 0)),
 				new DayOfWeekAndTime(DayOfWeek.FRIDAY, LocalTime.of(21,0)),
 				LocalDateTime.of(2021, 8, 31, 23, 59)
@@ -71,11 +71,11 @@ public class Module {
 		return fullTitle;
 	}
 
-	public ArrayList<Week> getWeeks() {
+	public ObservableList<Week> getWeeks() {
 		return weeks;
 	}
 
-	public void setWeeks(ArrayList<Week> weeks) {
+	public void setWeeks(ObservableList<Week> weeks) {
 		this.weeks = weeks;
 	}
 

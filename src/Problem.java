@@ -1,16 +1,27 @@
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Problem {
 
 	private String title;
-	private String set;
+	private String type;
 	private boolean hidden;
 	private ObservableList<String> files;
 	private ProblemDescription description;
 
-	public Problem(String title, String set, boolean hidden, ObservableList<String> files, ProblemDescription description) {
+	public Problem(String title, String type, boolean hidden, ObservableList<String> files, ProblemDescription description) {
 		this.title = title;
-		this.set = set;
+		this.type = type;
+		this.hidden = hidden;
+		this.files = files;
+		this.description = description;
+	}
+
+	public Problem(String title, String type, boolean hidden, String file, ProblemDescription description) {
+		ObservableList<String> files = FXCollections.observableArrayList();
+		files.add(file);
+		this.title = title;
+		this.type = type;
 		this.hidden = hidden;
 		this.files = files;
 		this.description = description;
@@ -24,12 +35,12 @@ public class Problem {
 		this.title = title;
 	}
 
-	public String getSet() {
-		return set;
+	public String getType() {
+		return type;
 	}
 
-	public void setSet(String set) {
-		this.set = set;
+	public void setType(String set) {
+		this.type = type;
 	}
 
 	public boolean isHidden() {

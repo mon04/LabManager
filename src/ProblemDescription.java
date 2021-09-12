@@ -14,6 +14,12 @@ public class ProblemDescription {
 		this.sampleIO = sampleIO;
 	}
 
+	public ProblemDescription() {
+
+		this("", new String[0], new String[0], new String[0], new String[0][]);
+
+	}
+
 	public String getBody() {
 		return body;
 	}
