@@ -340,7 +340,7 @@ public class RootController implements Initializable {
                 table_groups.getItems(),
                 table_weeks.getItems(),
                 new DayOfWeekAndTime(problemsReleasedDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
-                new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
+                new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_caEvaluationEndsTime.getText())),
                 LocalDateTime.of(LocalDate.parse(date_problemsDisappear.getEditor().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), LocalTime.parse(tf_problemsDisappearTime.getText()))
         );
     }
