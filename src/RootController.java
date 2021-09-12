@@ -373,10 +373,27 @@ public class RootController implements Initializable {
                 new Problem("Sum Two Numbers", "Lab", true, "SumTwoNum.java", new ProblemDescription())
         );
         problemSet1.getProblems().add(
-                new Problem("Palindrome", "Tutorial", false, "Palindrome.java", new ProblemDescription())
+                new Problem("Palindrome", "Practice", false, "Palindrome.java", new ProblemDescription())
         );
         problemSet1.getProblems().add(
-                new Problem("Bubble Sort", "Tutorial", false, "BubbleSort.java", new ProblemDescription())
+                new Problem("Bubble Sort", "Practice", false, "BubbleSort.java", new ProblemDescription())
+        );
+
+        ProblemSet problemSet2 = new ProblemSet();
+        problemSet2.getProblems().add(
+                new Problem("2D Arrays", "Lab", false, "TwoDArrays.java", new ProblemDescription())
+        );
+        problemSet2.getProblems().add(
+                new Problem("Dot Product", "Lab", false, "SumTwoNum.java", new ProblemDescription())
+        );
+        problemSet2.getProblems().add(
+                new Problem("Sum Even Numbers", "Lab", true, "SumEvens.java", new ProblemDescription())
+        );
+        problemSet2.getProblems().add(
+                new Problem("Binary Search", "Practice", false, "BinarySearch.java", new ProblemDescription())
+        );
+        problemSet2.getProblems().add(
+                new Problem("Greet the User", "Practice", false, "GreetTheUser.java", new ProblemDescription())
         );
 
         ObservableList<Week> weeks = FXCollections.observableArrayList();
@@ -384,7 +401,10 @@ public class RootController implements Initializable {
                 new Week(LocalDate.of(2021, 9, 20), problemSet1)
         );
         weeks.add(
-                new Week(LocalDate.of(2021, 9, 27), new ProblemSet())
+                new Week(LocalDate.of(2021, 9, 27), problemSet2)
+        );
+        weeks.add(
+                new Week(LocalDate.of(2021, 10, 4), new ProblemSet())
         );
 
         ObservableList<LabSession> sessions = FXCollections.observableArrayList();
