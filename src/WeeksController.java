@@ -14,6 +14,8 @@ import java.time.LocalDate;
 public class WeeksController {
 
     @FXML
+    private Label label_mainHeading;
+    @FXML
     private TableView<Week> table_weeks;
     @FXML
     private TableColumn<Week, LocalDate> tableColumn_begins;
@@ -40,6 +42,8 @@ public class WeeksController {
 
         setModule(m);
         setRootController(r);
+
+        label_mainHeading.setText(m.getFullTitle());
 
         weeks.addAll(module.getWeeks());
 

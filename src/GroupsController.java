@@ -121,7 +121,7 @@ public class GroupsController {
 
         combo_day.setItems(RootController.daysFormatted());
 
-        label_groupsEditorHeading.setText(m.getFullTitle());
+        label_groupsEditorHeading.setText(module.getFullTitle());
 
         sessions.addAll(module.getLabSessions());
 
