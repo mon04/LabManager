@@ -27,6 +27,9 @@
                <children>
                   <Label prefWidth="70.0" text="Begins:" />
                   <DatePicker fx:id="date_weekBegins" />
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#minusOneWeek" text="- 1 week" />
+                  <Button layoutX="270.0" layoutY="10.0" mnemonicParsing="false" onAction="#plusOneWeek" text="+ 1 week" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0" VBox.vgrow="NEVER">

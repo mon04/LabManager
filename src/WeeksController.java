@@ -86,6 +86,21 @@ public class WeeksController {
     }
 
     @FXML
+    public void plusOneWeek(ActionEvent event) {
+
+        LocalDate oldValue = date_weekBegins.getValue();
+        date_weekBegins.setValue(oldValue.plusWeeks(1));
+    }
+
+    @FXML
+    public void minusOneWeek(ActionEvent event) {
+
+        LocalDate oldValue = date_weekBegins.getValue();
+        date_weekBegins.setValue(oldValue.minusWeeks(1));
+    }
+
+
+    @FXML
     public void deleteButtonAction(ActionEvent event) {
         deleteSelectedWeek();
     }
