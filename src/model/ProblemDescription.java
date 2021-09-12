@@ -1,3 +1,5 @@
+package model;
+
 public class ProblemDescription {
 
 	private String body;

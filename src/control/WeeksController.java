@@ -1,3 +1,5 @@
+package control;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,6 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Module;
+import model.ProblemSet;
+import model.Week;
 
 import java.time.LocalDate;
 
@@ -140,7 +145,7 @@ public class WeeksController {
     public Week newWeekFromData() {
 
         LocalDate weekBegins = date_weekBegins.getValue();
-        ProblemSet problemSet = new ProblemSet(); //Change this when ProblemSet editor is being done
+        ProblemSet problemSet = new ProblemSet(); //Change this when model.ProblemSet editor is being done
 
         return new Week(weekBegins, problemSet);
     }

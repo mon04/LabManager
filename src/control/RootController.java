@@ -1,3 +1,5 @@
+package control;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +16,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.*;
+import model.Module;
 
 import java.io.IOException;
 import java.net.URL;
@@ -122,7 +126,7 @@ public class RootController implements Initializable {
 
         vbox_entireScene.setDisable(true);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Groups.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Groups.fxml"));
         Parent root = loader.load();
         GroupsController groupsController = loader.getController();
 
@@ -145,7 +149,7 @@ public class RootController implements Initializable {
 
         vbox_entireScene.setDisable(true);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Weeks.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Weeks.fxml"));
         Parent root = loader.load();
         WeeksController weeksController = loader.getController();
 

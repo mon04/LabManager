@@ -1,3 +1,5 @@
+package model;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.TextStyle;

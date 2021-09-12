@@ -1,3 +1,5 @@
+package control;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,6 +10,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.LabSession;
+import model.Module;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
