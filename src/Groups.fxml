@@ -45,10 +45,10 @@
                   <TextField fx:id="tf_startTime" prefHeight="25.0" prefWidth="50.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="4.0">
+            <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="4.0">
                <children>
-                  <Button fx:id="btn_deleteGroup" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="25.0" prefWidth="90.0" text="Delete group" />
                   <Button fx:id="btn_addGroup" layoutX="309.0" layoutY="10.0" mnemonicParsing="false" onAction="#addGroup" prefWidth="90.0" text="Add group" />
+                  <Button fx:id="btn_deleteGroup" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="25.0" prefWidth="90.0" text="Delete group" />
                </children>
             </HBox>
             <Separator prefWidth="200.0">

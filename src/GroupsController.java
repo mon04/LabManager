@@ -110,7 +110,6 @@ public class GroupsController {
 
         closeStage();
         rootController.setModuleEditor();
-        rootController.setDisable(false);
     }
 
     // Helper methods
@@ -221,6 +220,8 @@ public class GroupsController {
     }
 
     public void closeStage() {
+
+        rootController.setDisable(false);
         Stage stage = (Stage) btn_saveAll.getScene().getWindow();
         stage.close();
     }

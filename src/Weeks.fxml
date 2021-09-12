@@ -14,33 +14,40 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TableView fx:id="table_weeks" focusTraversable="false" minHeight="75.0" prefHeight="1000.0" prefWidth="308.0" stylesheets="@RemoveHBarsFromTableViews.css">
+            <TableView fx:id="table_weeks" editable="true" minHeight="75.0" onKeyPressed="#tableWeeksKeyPressed" onMouseClicked="#tableWeeksMouseClicked" prefHeight="1000.0" prefWidth="308.0" stylesheets="@RemoveHBarsFromTableViews.css" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="tableColumn_begins" editable="false" minWidth="20.0" prefWidth="120.66663074493408" sortable="false" text="Begins" />
-                  <TableColumn fx:id="tableColumn_problemSet" editable="false" minWidth="20.0" prefWidth="298.66673278808594" sortable="false" text="Problem set" />
+                  <TableColumn fx:id="tableColumn_begins" editable="false" minWidth="20.0" prefWidth="121" sortable="false" text="Begins" />
+                  <TableColumn fx:id="tableColumn_problemSet" editable="false" minWidth="20.0" prefWidth="299" sortable="false" text="Problem set" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0" VBox.vgrow="NEVER">
                <children>
-                  <Label text="Begins:" />
+                  <Label prefWidth="70.0" text="Begins:" />
                   <DatePicker fx:id="date_weekBegins" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0" VBox.vgrow="NEVER">
                <children>
-                  <Label text="Problem set" />
-                  <Label fx:id="label_problemSetInfo" text="Lab (9), Tutorial (3)" textFill="#9a9a9a" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="btn_editProblemSet" minWidth="60.0" mnemonicParsing="false" text="Edit" />
+                  <Label minWidth="-Infinity" prefWidth="70.0" text="Problem set" />
+                  <Label fx:id="label_problemSetInfo" minWidth="150.0" text="None" textFill="#9a9a9a" HBox.hgrow="ALWAYS" />
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btn_editProblemSet" minWidth="60.0" mnemonicParsing="false" onAction="#openProblemSetEditor" text="Edit" />
                </children>
             </HBox>
-            <Separator prefWidth="200.0" />
-            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+            <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="NEVER">
               <buttons>
-                <Button fx:id="btn_cancelWeeksEdit" mnemonicParsing="false" text="Cancel" />
-                  <Button fx:id="btn_saveWeeksEdit" layoutX="255.0" layoutY="10.0" mnemonicParsing="false" text="Save weeks" />
+                <Button minWidth="70.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefWidth="40.0" text="Delete" />
+                  <Button layoutX="357.0" layoutY="10.0" minWidth="70.0" mnemonicParsing="false" onAction="#addWeek" prefWidth="40.0" text="Add" />
+              </buttons>
+            </ButtonBar>
+            <Separator prefWidth="200.0" />
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" VBox.vgrow="NEVER">
+              <buttons>
+                <Button fx:id="btn_cancelWeeksEdit" minHeight="30.0" mnemonicParsing="false" onAction="#cancelWeeksEdit" text="Cancel" />
+                  <Button fx:id="btn_saveWeeksEdit" layoutX="255.0" layoutY="10.0" minHeight="30.0" mnemonicParsing="false" onAction="#saveWeeksEdit" text="Save weeks" />
               </buttons>
             </ButtonBar>
          </children>

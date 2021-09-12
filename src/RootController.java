@@ -52,7 +52,11 @@ public class RootController implements Initializable {
     @FXML
     private TextField tf_problemsDisappearTime;
     @FXML
-    private SplitPane splitPane_weeksTimedLabs;
+    private TableView<Week> table_weeks;
+    @FXML
+    private TableColumn<Week, LocalDate> tableColumn_weeks_begins;
+    @FXML
+    private TableColumn<Week, String> tableColumn_weeks_problemSet;
     @FXML
     private TableView<LabSession> table_groups;
     @FXML
@@ -63,8 +67,6 @@ public class RootController implements Initializable {
     private TableColumn<LabSession, String> tableColumn_groups_groupName;
     @FXML
     private Button btn_moduleWeeksEdit;
-    @FXML
-    private TableView<Week> table_weeks;
     @FXML
     private Button btn_moduleGroupsEdit;
     @FXML
@@ -82,6 +84,9 @@ public class RootController implements Initializable {
 
         list_savedModules.setItems(modules);
         setCellFactory(list_savedModules);
+
+        tableColumn_weeks_begins.setCellValueFactory(new PropertyValueFactory<>("weekBegins"));
+        tableColumn_weeks_problemSet.setCellValueFactory(new PropertyValueFactory<>("problemSet"));
 
         tableColumn_groups_day.setCellValueFactory(new PropertyValueFactory<>("day"));
         tableColumn_groups_time.setCellValueFactory(new PropertyValueFactory<>("startTime"));
@@ -223,6 +228,7 @@ public class RootController implements Initializable {
             tf_moduleCode.setText(selectedModule.getCode());
             tf_moduleTitle.setText(selectedModule.getTitle());
 
+            table_weeks.setItems(selectedModule.getWeeks());
             table_groups.setItems(selectedModule.getLabSessions());
 
             combo_problemsReleasedDay.setValue(selectedModule.getProblemsReleased().getDay().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
@@ -332,7 +338,7 @@ public class RootController implements Initializable {
                 tf_moduleTitle.getText(),
                 tf_moduleCode.getText(),
                 table_groups.getItems(),
-                FXCollections.observableArrayList(),
+                table_weeks.getItems(),
                 new DayOfWeekAndTime(problemsReleasedDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
                 new DayOfWeekAndTime(caEvaluationEndsDay, LocalTime.parse(tf_problemsReleasedTime.getText())),
                 LocalDateTime.of(LocalDate.parse(date_problemsDisappear.getEditor().getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")), LocalTime.parse(tf_problemsDisappearTime.getText()))
@@ -360,16 +366,16 @@ public class RootController implements Initializable {
     public void addTestModules(ObservableList<Module> destination) {
 
         ProblemSet problemSet1 = new ProblemSet();
-        problemSet1.add(
+        problemSet1.getProblems().add(
                 new Problem("Hello World", "Lab", false, "HelloWorld.java", new ProblemDescription())
         );
-        problemSet1.add(
+        problemSet1.getProblems().add(
                 new Problem("Sum Two Numbers", "Lab", true, "SumTwoNum.java", new ProblemDescription())
         );
-        problemSet1.add(
+        problemSet1.getProblems().add(
                 new Problem("Palindrome", "Tutorial", false, "Palindrome.java", new ProblemDescription())
         );
-        problemSet1.add(
+        problemSet1.getProblems().add(
                 new Problem("Bubble Sort", "Tutorial", false, "BubbleSort.java", new ProblemDescription())
         );
 

@@ -16,6 +16,14 @@ public class ProblemSet {
         this(FXCollections.observableArrayList());
     }
 
+    public ObservableList<Problem> getProblems() {
+        return problems;
+    }
+
+    public void setProblems(ObservableList<Problem> problems) {
+        this.problems = problems;
+    }
+
     public String getInfo() {
 
         if(problems.size() < 1) {
@@ -65,10 +73,6 @@ public class ProblemSet {
         }
 
         return count;
-    }
-
-    public void add(Problem problem) {
-        problems.add(problem);
     }
 
     public String toString() {
