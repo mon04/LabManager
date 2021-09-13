@@ -47,9 +47,9 @@ public class ProblemSet {
         return info;
     }
 
-    public ArrayList<String> getAllTypes() {
+    public ObservableList<String> getAllTypes() {
 
-        ArrayList<String> typesFound = new ArrayList<String>();
+        ObservableList<String> typesFound = FXCollections.observableArrayList();
 
         for(Problem p: problems) {
 

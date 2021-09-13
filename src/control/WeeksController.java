@@ -4,20 +4,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Module;
 import model.ProblemSet;
 import model.Week;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class WeeksController {
 
+    @FXML
+    private VBox vbox_entireScene;
     @FXML
     private Label label_mainHeading;
     @FXML
@@ -59,7 +67,25 @@ public class WeeksController {
     }
 
     @FXML
-    public void openProblemSetEditor(ActionEvent event) {
+    public void openProblemSetEditor(ActionEvent event) throws IOException {
+
+        vbox_entireScene.setDisable(true);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Problems.fxml"));
+        Parent root = loader.load();
+        ProblemsController problemsController = loader.getController();
+
+        problemsController.setData(getSelectedWeek(), this);
+
+        String moduleCode = module.getCode();
+
+        Stage stage = new Stage();
+        stage.setTitle(String.format("%s - Problems (%s)", moduleCode, getSelectedWeek().getWeekBegins()));
+        stage.setScene(new Scene(root));
+        stage.getIcons().add(new Image("/media/icon.png"));
+        stage.setMinWidth(400);
+        stage.setMinHeight(350);
+        stage.showAndWait();
 
     }
 
@@ -184,8 +210,19 @@ public class WeeksController {
         stage.close();
     }
 
+    public void setDisable(boolean disable) {
+
+        vbox_entireScene.setDisable(disable);
+    }
+
+
     public Module getModule() {
         return module;
+    }
+
+    public Week getSelectedWeek() {
+
+        return table_weeks.getSelectionModel().getSelectedItem();
     }
 
     public RootController getRootController() {
