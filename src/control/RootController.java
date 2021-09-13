@@ -371,33 +371,33 @@ public class RootController implements Initializable {
 
         ProblemSet problemSet1 = new ProblemSet();
         problemSet1.getProblems().add(
-                new Problem("Hello World", "Lab", false, "HelloWorld.java", new ProblemDescription())
+                new Problem("Hello World", "Java", "Lab", false, "HelloWorld.java", new ProblemDescription())
         );
         problemSet1.getProblems().add(
-                new Problem("Sum Two Numbers", "Lab", true, "SumTwoNum.java", new ProblemDescription())
+                new Problem("Sum Two Numbers", "Java", "Lab", true, "SumTwoNum.java", new ProblemDescription())
         );
         problemSet1.getProblems().add(
-                new Problem("Palindrome", "Practice", false, "Palindrome.java", new ProblemDescription())
+                new Problem("Palindrome", "Java", "Practice", false, "Palindrome.java", new ProblemDescription())
         );
         problemSet1.getProblems().add(
-                new Problem("Bubble Sort", "Practice", false, "BubbleSort.java", new ProblemDescription())
+                new Problem("Bubble Sort", "Java", "Practice", false, "BubbleSort.java", new ProblemDescription())
         );
 
         ProblemSet problemSet2 = new ProblemSet();
         problemSet2.getProblems().add(
-                new Problem("2D Arrays", "Lab", false, "TwoDArrays.java", new ProblemDescription())
+                new Problem("2D Arrays", "Java", "Lab", false, "TwoDArrays.java", new ProblemDescription())
         );
         problemSet2.getProblems().add(
-                new Problem("Dot Product", "Lab", false, "SumTwoNum.java", new ProblemDescription())
+                new Problem("Dot Product", "Java", "Lab", false, "SumTwoNum.java", new ProblemDescription())
         );
         problemSet2.getProblems().add(
-                new Problem("Sum Even Numbers", "Lab", true, "SumEvens.java", new ProblemDescription())
+                new Problem("Sum Even Numbers", "Java", "Lab", true, "SumEvens.java", new ProblemDescription())
         );
         problemSet2.getProblems().add(
-                new Problem("Binary Search", "Practice", false, "BinarySearch.java", new ProblemDescription())
+                new Problem("Binary Search", "Java", "Practice", false, "BinarySearch.java", new ProblemDescription())
         );
         problemSet2.getProblems().add(
-                new Problem("Greet the User", "Practice", false, "GreetTheUser.java", new ProblemDescription())
+                new Problem("Greet the User", "Java", "Practice", false, "GreetTheUser.java", new ProblemDescription())
         );
 
         ObservableList<Week> weeks = FXCollections.observableArrayList();

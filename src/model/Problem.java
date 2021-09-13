@@ -6,23 +6,26 @@ import javafx.collections.ObservableList;
 public class Problem {
 
 	private String title;
+	private String language;
 	private String type;
 	private boolean hidden;
 	private ObservableList<String> files;
 	private ProblemDescription description;
 
-	public Problem(String title, String type, boolean hidden, ObservableList<String> files, ProblemDescription description) {
+	public Problem(String title, String language, String type, boolean hidden, ObservableList<String> files, ProblemDescription description) {
 		this.title = title;
+		this.language = language;
 		this.type = type;
 		this.hidden = hidden;
 		this.files = files;
 		this.description = description;
 	}
 
-	public Problem(String title, String type, boolean hidden, String file, ProblemDescription description) {
+	public Problem(String title, String language, String type, boolean hidden, String file, ProblemDescription description) {
 		ObservableList<String> files = FXCollections.observableArrayList();
 		files.add(file);
 		this.title = title;
+		this.language = language;
 		this.type = type;
 		this.hidden = hidden;
 		this.files = files;
@@ -35,6 +38,14 @@ public class Problem {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public String getType() {
