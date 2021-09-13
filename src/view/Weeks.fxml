@@ -34,16 +34,16 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="8.0" VBox.vgrow="NEVER">
                <children>
-                  <Label minWidth="-Infinity" prefWidth="70.0" text="model.Problem set" />
+                  <Label minWidth="-Infinity" prefWidth="70.0" text="Problems:" />
                   <Label fx:id="label_problemSetInfo" minWidth="150.0" text="None" textFill="#9a9a9a" HBox.hgrow="ALWAYS" />
                   <Pane HBox.hgrow="ALWAYS" />
                   <Button fx:id="btn_editProblemSet" minWidth="60.0" mnemonicParsing="false" onAction="#openProblemSetEditor" text="Edit" />
                </children>
             </HBox>
-            <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="NEVER">
+            <ButtonBar buttonMinWidth="90.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="NEVER">
               <buttons>
-                <Button minWidth="70.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefWidth="40.0" text="Delete" />
-                  <Button layoutX="357.0" layoutY="10.0" minWidth="70.0" mnemonicParsing="false" onAction="#addWeek" prefWidth="40.0" text="Add" />
+                <Button minWidth="80.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefWidth="40.0" text="Delete week" />
+                  <Button layoutX="357.0" layoutY="10.0" minWidth="70.0" mnemonicParsing="false" onAction="#addWeek" prefWidth="40.0" text="Add week" />
               </buttons>
             </ButtonBar>
             <Separator prefWidth="200.0" />
