@@ -78,7 +78,6 @@ public class RootController implements Initializable {
     @FXML
     private Button btn_deleteModule;
 
-
     private ObservableList<Module> modules = FXCollections.observableArrayList();
 
 

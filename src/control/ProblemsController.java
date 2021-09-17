@@ -9,15 +9,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Problem;
 import model.ProblemDescription;
 import model.ProblemSet;
 import model.Week;
-//import model.Module;
 
 public class ProblemsController {
 
+    @FXML
+    private VBox vBox_entireScene;
     @FXML
     private Label label_mainHeading;
     @FXML
@@ -38,8 +40,6 @@ public class ProblemsController {
     private CheckBox checkBox_hidden;
 
     private WeeksController weeksController;
-
-    //private Module module;
 
     private Week week;
 

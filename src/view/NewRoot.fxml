@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="800.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <SplitPane dividerPositions="0.25" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <items>
+        <AnchorPane>
+          <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                  <Label alignment="CENTER" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Modules" textAlignment="CENTER" textFill="#9a9a9a" wrapText="false">
+                    <font>
+                      <Font size="16.0" fx:id="x1" />
+                    </font>
+                  </Label>
+                        <TreeView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+          </children>
+        </AnchorPane>
+            <AnchorPane>
+               <children>
+              <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" prefWidth="494.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <content>
+                  <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+                    <children>
+                              <VBox fx:id="vbox_newModule" alignment="CENTER_LEFT" prefHeight="116.0" prefWidth="372.0" spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Label fx:id="label_moduleEditorHeading" text="New module" textFill="#9a9a9a">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="4.0">
+                                       <children>
+                                          <Label minWidth="-Infinity" prefWidth="110.0" text="Code:" />
+                                          <TextField fx:id="tf_moduleCode" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="34.0" prefWidth="200.0" spacing="4.0">
+                                       <children>
+                                          <Label minWidth="-Infinity" prefWidth="110.0" text="Title:" />
+                                          <TextField fx:id="tf_moduleTitle" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="BASELINE_LEFT" prefWidth="200.0" spacing="4.0">
+                                       <children>
+                                          <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="Problems released:" HBox.hgrow="ALWAYS" />
+                                          <VBox alignment="CENTER_LEFT" prefWidth="160.0" HBox.hgrow="NEVER">
+                                             <children>
+                                                <ComboBox fx:id="combo_problemsReleasedDay" editable="true" minWidth="100.0" onKeyPressed="#comboProblemsReleasedDayKeyPressed" prefHeight="25.0" prefWidth="1200.0" />
+                                                <Label text="day of week" textFill="#9a9a9a" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
+                                             <children>
+                                                <TextField fx:id="tf_problemsReleasedTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
+                                                <Label text="time" textFill="#9a9a9a" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="8.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox alignment="BASELINE_LEFT" prefWidth="200.0" spacing="4.0">
+                                       <children>
+                                          <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="CA evaluation ends:" HBox.hgrow="ALWAYS" />
+                                          <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="160.0" HBox.hgrow="NEVER">
+                                             <children>
+                                                <ComboBox fx:id="combo_caEvaluationEndsDay" editable="true" minWidth="100.0" onKeyPressed="#comboCaEvaluationEndsDayKeyPressed" prefHeight="25.0" prefWidth="1200.0" />
+                                                <Label text="day of week" textFill="#9a9a9a" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="43.0" prefWidth="50.0">
+                                             <children>
+                                                <TextField fx:id="tf_caEvaluationEndsTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
+                                                <Label text="time" textFill="#9a9a9a" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="BASELINE_LEFT" prefWidth="200.0" spacing="4.0">
+                                       <children>
+                                          <Label minWidth="-Infinity" prefHeight="17.0" prefWidth="110.0" text="Problems disappear:" HBox.hgrow="ALWAYS" />
+                                          <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="160.0" HBox.hgrow="NEVER">
+                                             <children>
+                                                <DatePicker fx:id="date_problemsDisappear" minWidth="100.0" prefHeight="25.0" />
+                                                <Label text="date" textFill="#9a9a9a" />
+                                             </children>
+                                          </VBox>
+                                          <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="50.0">
+                                             <children>
+                                                <TextField fx:id="tf_problemsDisappearTime" minWidth="-Infinity" prefHeight="25.0" prefWidth="50.0" />
+                                                <Label text="time" textFill="#9a9a9a" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <SplitPane fx:id="splitPane_weeksTimedLabs" dividerPositions="0.5" orientation="VERTICAL" prefHeight="4000.0" prefWidth="160.0" style="-fx-padding: 0;" VBox.vgrow="ALWAYS">
+                                       <items>
+                                          <AnchorPane maxHeight="1.7976931348623157E308" minWidth="0.0" prefHeight="2000.0" prefWidth="160.0">
+                                             <children>
+                                                <VBox prefHeight="2000.0" prefWidth="100.0" spacing="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefWidth="200.0">
+                                                         <children>
+                                                            <Label minWidth="-Infinity" prefWidth="45.0" text="Weeks" />
+                                                            <Pane prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                            <Button fx:id="btn_moduleWeeksEdit" minWidth="-Infinity" mnemonicParsing="false" onAction="#openWeeksEditor" prefWidth="60.0" text="Edit" />
+                                                         </children>
+                                                      </HBox>
+                                                      <TableView fx:id="table_weeks" focusTraversable="false" minHeight="75.0" prefHeight="1000.0" prefWidth="308.0" stylesheets="@RemoveHBarsFromTableViews.css">
+                                                         <columns>
+                                                            <TableColumn fx:id="tableColumn_weeks_begins" editable="false" minWidth="20.0" prefWidth="112.0" sortable="false" text="Begins" />
+                                                            <TableColumn fx:id="tableColumn_weeks_problemSet" editable="false" minWidth="20.0" prefWidth="300.0" sortable="false" text="Problems" />
+                                                         </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane maxHeight="1.7976931348623157E308" minWidth="0.0" prefHeight="2000.0" prefWidth="160.0">
+                                             <children>
+                                                <VBox prefHeight="2000.0" prefWidth="100.0" spacing="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER_LEFT" prefWidth="200.0">
+                                                         <children>
+                                                            <Label minWidth="-Infinity" prefHeight="17.0" text="Timed labs" />
+                                                            <Pane prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                                            <Button fx:id="btn_moduleGroupsEdit" minWidth="-Infinity" mnemonicParsing="false" onAction="#openGroupsEditor" prefWidth="60.0" text="Edit" />
+                                                         </children>
+                                                      </HBox>
+                                                      <TableView fx:id="table_groups" focusTraversable="false" maxHeight="1.7976931348623157E308" minHeight="75.0" prefHeight="1000.0" stylesheets="@RemoveHBarsFromTableViews.css">
+                                                         <columns>
+                                                            <TableColumn fx:id="tableColumn_groups_day" editable="false" minWidth="20.0" prefWidth="84.33331108093262" sortable="false" text="Day" />
+                                                            <TableColumn fx:id="tableColumn_groups_time" editable="false" minWidth="20.0" prefWidth="58.0" sortable="false" text="Time" />
+                                                            <TableColumn fx:id="tableColumn_groups_groupName" editable="false" minWidth="20.0" prefWidth="217.33335876464844" sortable="false" text="Group name" />
+                                                         </columns>
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                       </items>
+                                       <padding>
+                                          <Insets top="4.0" />
+                                       </padding>
+                                    </SplitPane>
+                                 </children>
+                              </VBox>
+                    </children>
+                  </AnchorPane>
+                </content>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+              </ScrollPane>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" text="Delete module" />
+                        <Button layoutX="563.0" layoutY="17.0" mnemonicParsing="false" text="Save module" />
+                    </buttons>
+                     <padding>
+                        <Insets left="8.0" right="8.0" />
+                     </padding>
+                  </ButtonBar>
+               </children>
+            </AnchorPane>
+      </items>
+    </SplitPane>
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
+          <font>
+            <Font size="11.0" fx:id="x3" />
+          </font>
+          <textFill>
+            <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
+          </textFill>
+        </Label>
+        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
+        <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>
